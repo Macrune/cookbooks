@@ -13,6 +13,9 @@ import com.impal.CookBook.Payload.UserInfoResponse;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 
 @Controller
@@ -37,9 +40,19 @@ public class UserController {
     public ResponseEntity<?> registerUser(@RequestBody Map<String, String> payload) {
         try {
             service.registerUser(payload.get("username"), payload.get("email"), payload.get("password"));
-            return new ResponseEntity<String>("User registered successfully!", HttpStatus.OK);
+            return new ResponseEntity<String>("register.User registered successfully!", HttpStatus.OK);
         }catch(Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+    
+    @GetMapping("/{imdbId}")
+    public ResponseEntity<?> findUser(@PathVariable String imdbId) {
+        try {
+            UserInfoResponse userResponse = service.convertToResponse(service.findUserByImdbId(imdbId));
+            return new ResponseEntity<UserInfoResponse>(userResponse, HttpStatus.OK);
+        }catch (Exception e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
     

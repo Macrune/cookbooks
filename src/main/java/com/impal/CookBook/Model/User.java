@@ -18,17 +18,18 @@ public class User {
     private String password;
     private String profilePic;
     @DocumentReference
-    private ArrayList<Recipes> bookmarks;
+    private ArrayList<Recipe> bookmarks;
     @DocumentReference
-    private ArrayList<Recipes> myrecipes;
+    private ArrayList<Recipe> myrecipes;
 
     public User() {
     }
-    
-    public User(ObjectId id, String imdbId, String username, String password, String profilePic, ArrayList<Recipes> bookmarks, ArrayList<Recipes> myrecipes) {
+
+    public User(ObjectId id, String imdbId, String username, String email, String password, String profilePic, ArrayList<Recipe> bookmarks, ArrayList<Recipe> myrecipes) {
         this.id = id;
         this.imdbId = imdbId;
         this.username = username;
+        this.email = email;
         this.password = password;
         this.profilePic = profilePic;
         this.bookmarks = bookmarks;
@@ -90,19 +91,19 @@ public class User {
         this.profilePic = profilePic;
     }
 
-    public ArrayList<Recipes> getBookmarks() {
+    public ArrayList<Recipe> getBookmarks() {
         return bookmarks;
     }
 
-    public void setBookmarks(ArrayList<Recipes> bookmarks) {
+    public void setBookmarks(ArrayList<Recipe> bookmarks) {
         this.bookmarks = bookmarks;
     }
 
-    public ArrayList<Recipes> getMyrecipes() {
+    public ArrayList<Recipe> getMyrecipes() {
         return myrecipes;
     }
 
-    public void setMyrecipes(ArrayList<Recipes> myrecipes) {
+    public void setMyrecipes(ArrayList<Recipe> myrecipes) {
         this.myrecipes = myrecipes;
     }
 

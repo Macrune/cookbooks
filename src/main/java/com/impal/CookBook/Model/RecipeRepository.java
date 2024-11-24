@@ -7,6 +7,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RepiceRepository extends MongoRepository<Recipes, ObjectId>{
-    Optional<Recipes> findRecipeByImdbId(String imdbId);
+public interface RecipeRepository extends MongoRepository<Recipe, ObjectId>{
+    Optional<Recipe> findRecipeByImdbId(String imdbId);
 }

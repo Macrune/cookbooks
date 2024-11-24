@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends MongoRepository<User, ObjectId> {
     Optional<User> findUserByImdbId(String imdbId);
     Optional<User> findUserByUsername(String username);
-    Boolean existByUsername(String username);
-    Boolean existByEmail(String email);
+    Boolean existsByUsername(String username);
+    Boolean existsByEmail(String email);
 }

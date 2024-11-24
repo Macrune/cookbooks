@@ -7,15 +7,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.impal.CookBook.Model.Recipes;
+import com.impal.CookBook.Model.*;
+import com.impal.CookBook.Payload.*;
+
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class RecipeController {
 
     @Autowired
-    RecipeService service;
+    private RecipeService service;
 
     @GetMapping("/test")
     public String homepage() {
@@ -23,15 +25,23 @@ public class RecipeController {
     }
 
     @GetMapping("/allrecipe")    
-    public ResponseEntity<List<Recipes>> allRecipe() {
-        return new ResponseEntity<List<Recipes>>(service.getAllRecipe(), HttpStatus.OK);
+    public ResponseEntity<List<RecipeResponse>> allRecipe() {
+        List<Recipe> allRes = service.getAllRecipe();
+        List<RecipeResponse> allRecipesResponse = new ArrayList<RecipeResponse>();
+        for (Recipe re : allRes) {
+            allRecipesResponse.add(service.convertToResponse(re));
+        }
+        
+        return new ResponseEntity<List<RecipeResponse>>(allRecipesResponse, HttpStatus.OK);
     }
     
 
     @GetMapping("/recipes/{imdbId}")
-    public ResponseEntity<Optional<Recipes>> getRecipeFromId(@PathVariable String imdbId) {
-        return new ResponseEntity<Optional<Recipes>>(service.findRecipeByImdbId(imdbId), HttpStatus.OK);
+    public ResponseEntity<?> getRecipeFromId(@PathVariable String imdbId) {
+        try {
+            return new ResponseEntity<RecipeResponse>(service.convertToResponse(service.findRecipeByImdbId(imdbId)), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
-    
-    
 }

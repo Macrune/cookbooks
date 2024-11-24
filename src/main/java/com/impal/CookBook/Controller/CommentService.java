@@ -1,7 +1,5 @@
 package com.impal.CookBook.Controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -10,8 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.impal.CookBook.Model.Comment;
 import com.impal.CookBook.Model.CommentRepository;
-import com.impal.CookBook.Model.Recipes;
+import com.impal.CookBook.Model.Recipe;
 import com.impal.CookBook.Model.User;
+import com.impal.CookBook.Payload.CommentResponse;
 
 @Service
 public class CommentService {
@@ -24,24 +23,26 @@ public class CommentService {
     @Autowired
     private UserService userService;
 
-    public Comment createComment(String commentBody, String authorId, String recipeId) {
-        Optional<User> checkAuthor = userService.findUserByImdbId(authorId);
-        User author;
+    public CommentResponse convertToResponse(Comment comment) {
+        return new CommentResponse(userService.convertToResponse(comment.getAuthor()), comment.getBody());
+    }
 
-        if (checkAuthor.isPresent()) {
-            author = checkAuthor.get();
-        }else {
-            author = new User();
+    public Comment createComment(String commentBody, String authorId, String recipeId) throws Exception {
+        try {
+            User author = userService.findUserByImdbId(authorId);
+            Comment comment = new Comment(author, commentBody);
+            repository.insert(comment);
+
+            mongoTemplate.update(Recipe.class)
+                .matching(Criteria.where("imdbId").is(recipeId))
+                .apply(new Update().push("comments").value(comment.getId()))
+                .first();
+            
+            return comment;
+        }catch (Exception e) {
+            throw new Exception("createComment.Author not found");
         }
 
-        Comment comment = new Comment(author, commentBody);
-        repository.insert(comment);
-
-        mongoTemplate.update(Recipes.class)
-            .matching(Criteria.where("imdbId").is(recipeId))
-            .apply(new Update().push("comments").value(comment.getId()))
-            .first();
         
-        return comment;
     }
 }

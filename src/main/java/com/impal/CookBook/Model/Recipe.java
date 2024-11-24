@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 @Document(collection = "recipe")
-public class Recipes {
+public class Recipe {
     @Id
     private ObjectId id;
     private String imdbId;
@@ -28,9 +28,9 @@ public class Recipes {
     @DocumentReference
     private ArrayList<Comment> comments;
 
-    public Recipes() {}
+    public Recipe() {}
 
-    public Recipes(ObjectId id, String imdbId, User author, String tittle, String Description, int cookTime, ArrayList<String> tags, String prepCategory, int servings, double rating, String mainImage, ArrayList<String> ingredients, ArrayList<String> body, ArrayList<String> images, ArrayList<Comment> comments) {
+    public Recipe(ObjectId id, String imdbId, User author, String tittle, String Description, int cookTime, ArrayList<String> tags, String prepCategory, int servings, double rating, String mainImage, ArrayList<String> ingredients, ArrayList<String> body, ArrayList<String> images, ArrayList<Comment> comments) {
         this.id = id;
         this.imdbId = imdbId;
         this.author = author;
@@ -48,7 +48,7 @@ public class Recipes {
         this.comments = comments;
     }
 
-    public Recipes(ObjectId id, String imdbId, User author, String tittle, String Description, int cookTime, ArrayList<String> tags, String prepCategory, int servings, double rating, String mainImage, ArrayList<String> ingredients, ArrayList<String> body, ArrayList<String> images) {
+    public Recipe(ObjectId id, String imdbId, User author, String tittle, String Description, int cookTime, ArrayList<String> tags, String prepCategory, int servings, double rating, String mainImage, ArrayList<String> ingredients, ArrayList<String> body, ArrayList<String> images) {
         this.id = id;
         this.imdbId = imdbId;
         this.author = author;
@@ -65,7 +65,7 @@ public class Recipes {
         this.images = images;
     }
 
-    public Recipes(ObjectId id, String imdbId, String tittle, String Description, int cookTime, ArrayList<String> tags, String prepCategory, int servings, double rating, String mainImage, ArrayList<String> ingredients, ArrayList<String> body, ArrayList<String> images) {
+    public Recipe(ObjectId id, String imdbId, String tittle, String Description, int cookTime, ArrayList<String> tags, String prepCategory, int servings, double rating, String mainImage, ArrayList<String> ingredients, ArrayList<String> body, ArrayList<String> images) {
         this.id = id;
         this.imdbId = imdbId;
         this.tittle = tittle;

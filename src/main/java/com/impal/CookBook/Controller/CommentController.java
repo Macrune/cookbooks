@@ -22,8 +22,13 @@ public class CommentController {
     private CommentService service;
 
     @PostMapping()
-    public ResponseEntity<Comment> postMethodName(@RequestBody Map<String, String> payload, @PathVariable String imdbId) {
-        return new ResponseEntity<Comment>(service.createComment(payload.get("commentBody"), payload.get("authorId"), imdbId), HttpStatus.CREATED);
+    public ResponseEntity<?> postMethodName(@RequestBody Map<String, String> payload, @PathVariable String imdbId) {
+        try {
+            return new ResponseEntity<Comment>(service.createComment(payload.get("commentBody"), payload.get("authorId"), imdbId), HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        
     }
 
     
