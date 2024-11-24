@@ -41,7 +41,9 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.profilePic = profilePic;
+        this.profilePic = "image/67435c44d45c2a3e6f39fa7f";
+        this.bookmarks = new ArrayList<>();
+        this.myrecipes = new ArrayList<>();
     }
 
     public User(String imdbId, String username, String email, String password) {
@@ -49,6 +51,9 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.profilePic = "image/67435c44d45c2a3e6f39fa7f";
+        this.bookmarks = new ArrayList<>();
+        this.myrecipes = new ArrayList<>();
     }
 
     public ObjectId getId() {

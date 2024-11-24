@@ -63,6 +63,7 @@ public class Recipe {
         this.ingredients = ingredients;
         this.body = body;
         this.images = images;
+        this.comments = new ArrayList<>();
     }
 
     public Recipe(ObjectId id, String imdbId, String tittle, String Description, int cookTime, ArrayList<String> tags, String prepCategory, int servings, double rating, String mainImage, ArrayList<String> ingredients, ArrayList<String> body, ArrayList<String> images) {
@@ -79,6 +80,7 @@ public class Recipe {
         this.ingredients = ingredients;
         this.body = body;
         this.images = images;
+        this.comments = new ArrayList<>();
     }
 
     

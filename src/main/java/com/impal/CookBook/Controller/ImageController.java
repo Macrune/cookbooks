@@ -1,10 +1,8 @@
 package com.impal.CookBook.Controller;
 
 import java.io.IOException;
-import java.util.Base64;
 
 import org.springframework.http.MediaType;
-import org.bson.types.Binary;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,7 +30,7 @@ public class ImageController {
     public ResponseEntity<String> addImage(@RequestParam("title") String title, 
     @RequestParam("image") MultipartFile image) throws IOException{
         ObjectId id = service.addImage(title, image);
-        return new ResponseEntity<String>(id.toString(), HttpStatus.OK);
+        return new ResponseEntity<String>("image/" + id.toString(), HttpStatus.OK);
     }
 
     @GetMapping(value="/{id}", produces = MediaType.IMAGE_PNG_VALUE)
