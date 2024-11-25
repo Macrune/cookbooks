@@ -22,7 +22,7 @@ public class CommentController {
     private CommentService service;
 
     @PostMapping()
-    public ResponseEntity<?> postMethodName(@RequestBody Map<String, String> payload, @PathVariable String imdbId) {
+    public ResponseEntity<?> createComment(@RequestBody Map<String, String> payload, @PathVariable String imdbId) {
         try {
             return new ResponseEntity<Comment>(service.createComment(payload.get("commentBody"), payload.get("authorId"), imdbId), HttpStatus.CREATED);
         } catch (Exception e) {
