@@ -32,6 +32,13 @@ public class RecipeService {
                         re.getIngredients(), re.getBody(), re.getImages(), comments);
     }
 
+    public RecipeCardResponse convertToResponseCard(Recipe re) {
+        UserInfoResponse author = userService.convertToResponse(re.getAuthor());
+
+        return new RecipeCardResponse(re.getImdbId(), author, re.getTittle(), re.getDescription()
+                , re.getCookTime(), re.getPrepCategory(), re.getServings(), re.getRating(), re.getMainImage());
+    }
+
     public List<Recipe> getAllRecipe() {
         System.out.println(repository.findAll());
         return repository.findAll();
@@ -45,5 +52,15 @@ public class RecipeService {
         }
 
         return recipe.get();
+    }
+
+    public List<Recipe> findByTagsIn(ArrayList<String> tags) throws Exception {
+        List<Recipe> recipes = repository.findByTagsIn(tags);
+
+        if (recipes.isEmpty()) {
+            throw new Exception("findByIngredientsIn.Recipe is not found");
+        }
+
+        return recipes;
     }
 }

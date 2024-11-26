@@ -29,16 +29,23 @@ public class ImageController {
     @PostMapping("/add")
     public ResponseEntity<String> addImage(@RequestParam("title") String title, 
     @RequestParam("image") MultipartFile image) throws IOException{
-        ObjectId id = service.addImage(title, image);
+        final ObjectId id = service.addImage(title, image);
         return new ResponseEntity<String>("image/" + id.toString(), HttpStatus.OK);
     }
 
     @GetMapping(value="/{id}", produces = MediaType.IMAGE_PNG_VALUE)
     public ResponseEntity<byte[]> getImage(@PathVariable String id) {
-        Image image = service.getImage(new ObjectId(id));
+        final Image image = service.getImage(new ObjectId(id));
         // byte[] file = Base64.getDecoder().decode(image.getImage().toString());
         return new ResponseEntity<byte[]>(image.getImage(), HttpStatus.OK);
     }
     
+    @GetMapping(value="/svg/{id}")
+    public ResponseEntity<byte[]> getSVG(@PathVariable String id) {
+        final Image image = service.getImage(new ObjectId(id));
+        final String header = "<svg x=\"0\" y=\"0 ... ...</svg>";
+
+        return ResponseEntity.ok().header(header).body(image.getImage());
+    }
     
 }

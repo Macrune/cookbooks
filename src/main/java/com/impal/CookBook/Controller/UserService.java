@@ -3,8 +3,8 @@ package com.impal.CookBook.Controller;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import com.impal.CookBook.Model.User;
 import com.impal.CookBook.Model.UserRepository;
 import com.impal.CookBook.Payload.UserInfoResponse;
@@ -15,6 +15,8 @@ import com.impal.CookBook.Payload.UserInfoResponse;
 public class UserService {
     @Autowired
     private UserRepository repository;
+
+    private BCryptPasswordEncoder encoder =  new BCryptPasswordEncoder(16);
 
     public User findUserByImdbId(String imdbId) throws Exception {
         Optional<User> user = repository.findUserByImdbId(imdbId);
@@ -36,7 +38,7 @@ public class UserService {
             throw new Exception("authenticateUser.User doesn't exist");
         }
 
-        if (user.get().getPassword().matches(password)) {
+        if (encoder.matches(password, user.get().getPassword())) {
             return user.get();
         }else {
             throw new Exception("authenticateUser.Wrong password");
@@ -53,7 +55,7 @@ public class UserService {
         }
 
         String imdbId = username.replaceAll(" ", "").toLowerCase();
-        User newUser = new User(imdbId, username, email, password);
+        User newUser = new User(imdbId, username, email, encoder.encode(password));
         repository.insert(newUser);
     }
 }
