@@ -48,4 +48,11 @@ public class ImageController {
         return ResponseEntity.ok().header(header).body(image.getImage());
     }
     
+    @GetMapping(value="/svg/icon")
+    public ResponseEntity<byte[]> getIcon() {
+        final Image image = service.getImage(new ObjectId("6745fa0443513141adebb498"));
+        final String header = "<svg x=\"0\" y=\"0 ... ...</svg>";
+
+        return ResponseEntity.ok().header(header).body(image.getImage());
+    }
 }

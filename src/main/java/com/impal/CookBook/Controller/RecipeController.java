@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.impal.CookBook.Model.*;
 import com.impal.CookBook.Payload.*;
@@ -14,15 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@RequestMapping("/api/recipes")
 public class RecipeController {
 
     @Autowired
     private RecipeService service;
-
-    @GetMapping("/test")
-    public String homepage() {
-        return "homepage";
-    }
 
     @GetMapping("/allrecipe")    
     public ResponseEntity<List<RecipeResponse>> allRecipe() {
@@ -36,7 +33,7 @@ public class RecipeController {
     }
     
 
-    @GetMapping("/recipes/{imdbId}")
+    @GetMapping("/{imdbId}")
     public ResponseEntity<?> getRecipeFromId(@PathVariable String imdbId) {
         try {
             return new ResponseEntity<RecipeResponse>(service.convertToResponse(service.findRecipeByImdbId(imdbId)), HttpStatus.OK);

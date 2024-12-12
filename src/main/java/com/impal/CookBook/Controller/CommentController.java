@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping("/recipes/{imdbId}/createComment")
+@RequestMapping("/api/recipes/{imdbId}/createComment")
 public class CommentController {
     
     @Autowired

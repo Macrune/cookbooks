@@ -7,12 +7,15 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
+import jakarta.validation.constraints.NotBlank;
+
 @Document(collection = "recipe")
 public class Recipe {
     @Id
     private ObjectId id;
     private String imdbId;
     @DocumentReference
+    @NotBlank
     private User author;
     private String tittle;
     private String Description;
@@ -30,9 +33,9 @@ public class Recipe {
 
     public Recipe() {}
 
-    public Recipe(ObjectId id, String imdbId, User author, String tittle, String Description, int cookTime, ArrayList<String> tags, String prepCategory, int servings, double rating, String mainImage, ArrayList<String> ingredients, ArrayList<String> body, ArrayList<String> images, ArrayList<Comment> comments) {
+    public Recipe(ObjectId id, User author, String tittle, String Description, int cookTime, ArrayList<String> tags, String prepCategory, int servings, double rating, String mainImage, ArrayList<String> ingredients, ArrayList<String> body, ArrayList<String> images, ArrayList<Comment> comments) {
         this.id = id;
-        this.imdbId = imdbId;
+        this.imdbId = id.toString();
         this.author = author;
         this.tittle = tittle;
         this.Description = Description;
@@ -48,9 +51,9 @@ public class Recipe {
         this.comments = comments;
     }
 
-    public Recipe(ObjectId id, String imdbId, User author, String tittle, String Description, int cookTime, ArrayList<String> tags, String prepCategory, int servings, double rating, String mainImage, ArrayList<String> ingredients, ArrayList<String> body, ArrayList<String> images) {
+    public Recipe(ObjectId id, User author, String tittle, String Description, int cookTime, ArrayList<String> tags, String prepCategory, int servings, double rating, String mainImage, ArrayList<String> ingredients, ArrayList<String> body, ArrayList<String> images) {
         this.id = id;
-        this.imdbId = imdbId;
+        this.imdbId = id.toString();
         this.author = author;
         this.tittle = tittle;
         this.Description = Description;
@@ -66,9 +69,9 @@ public class Recipe {
         this.comments = new ArrayList<>();
     }
 
-    public Recipe(ObjectId id, String imdbId, String tittle, String Description, int cookTime, ArrayList<String> tags, String prepCategory, int servings, double rating, String mainImage, ArrayList<String> ingredients, ArrayList<String> body, ArrayList<String> images) {
+    public Recipe(ObjectId id, String tittle, String Description, int cookTime, ArrayList<String> tags, String prepCategory, int servings, double rating, String mainImage, ArrayList<String> ingredients, ArrayList<String> body, ArrayList<String> images) {
         this.id = id;
-        this.imdbId = imdbId;
+        this.imdbId = id.toString();
         this.tittle = tittle;
         this.Description = Description;
         this.cookTime = cookTime;

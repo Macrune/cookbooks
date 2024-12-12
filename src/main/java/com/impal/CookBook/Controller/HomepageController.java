@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -14,9 +15,8 @@ import com.impal.CookBook.Model.Recipe;
 import com.impal.CookBook.Payload.RecipeCardResponse;
 
 
-
 @Controller
-@RequestMapping("/homepage")
+@RequestMapping()
 public class HomepageController {
     @Autowired
     RecipeService service;
@@ -24,7 +24,20 @@ public class HomepageController {
     @Autowired
     ImageController imageController;
 
-    @GetMapping("/featured")
+    @GetMapping("/homepage")
+    public String mainHomepage(Model model) {
+        ResponseEntity<?> featured = getFeaturedRecipe();
+        ResponseEntity<?> community = getCommunityRecipe();
+        ResponseEntity<?> icon = imageController.getIcon();
+
+        model.addAttribute("icon", icon.getBody());
+        model.addAttribute("featured", featured.getBody());
+        model.addAttribute("community", community.getBody());
+        return "homepage";
+    }
+    
+
+    @GetMapping("/api/homepage/featured")
     public ResponseEntity<?> getFeaturedRecipe() {
 
         try {
@@ -41,7 +54,7 @@ public class HomepageController {
         }
     }
 
-    @GetMapping("/community")
+    @GetMapping("/api/homepage/community")
     public ResponseEntity<?> getCommunityRecipe() {
 
         try {
