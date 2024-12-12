@@ -5,11 +5,14 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
+import jakarta.validation.constraints.NotBlank;
+
 @Document(collection = "comment")
 public class Comment {
     @Id
     private ObjectId id;
     @DocumentReference
+    @NotBlank
     private User author;
     private String body;
 
