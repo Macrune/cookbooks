@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.impal.CookBook.Model.Recipe;
@@ -22,14 +23,18 @@ public class HomepageController {
     RecipeService service;
 
     @Autowired
+    UserService userService;
+
+    @Autowired
     ImageController imageController;
 
     @GetMapping("/homepage")
-    public String mainHomepage(Model model) {
+    public String mainHomepage(@CookieValue(value = "userCookie", defaultValue = "Guest") String cookie, Model model) {
         ResponseEntity<?> featured = getFeaturedRecipe();
         ResponseEntity<?> community = getCommunityRecipe();
         ResponseEntity<?> icon = imageController.getIcon();
-
+        
+        model.addAttribute("user", cookie);
         model.addAttribute("icon", icon.getBody());
         model.addAttribute("featured", featured.getBody());
         model.addAttribute("community", community.getBody());

@@ -21,15 +21,15 @@ public class CommentService {
     private MongoTemplate mongoTemplate;
 
     @Autowired
-    private UserService userService;
+    private UserService userServiceComment;
 
     public CommentResponse convertToResponse(Comment comment) {
-        return new CommentResponse(userService.convertToResponse(comment.getAuthor()), comment.getBody());
+        return new CommentResponse(userServiceComment.convertToResponse(comment.getAuthor()), comment.getBody());
     }
 
     public Comment createComment(String commentBody, String authorId, String recipeId) throws Exception {
         try {
-            User author = userService.findUserByImdbId(authorId);
+            User author = userServiceComment.findUserByImdbId(authorId);
             Comment comment = new Comment(author, commentBody);
             repository.insert(comment);
 
