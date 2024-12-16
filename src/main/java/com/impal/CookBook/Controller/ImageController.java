@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.impal.CookBook.Model.Image;
@@ -26,11 +25,16 @@ public class ImageController {
     @Autowired
     ImageService service;
 
+    @GetMapping("/add")
+    public String addForm() {
+        return "createRecipe";
+    }
+    
+
     @PostMapping("/add")
-    public ResponseEntity<String> addImage(@RequestParam("title") String title, 
-    @RequestParam("image") MultipartFile image) throws IOException{
+    public String addImage(String title, MultipartFile image) throws IOException{
         final ObjectId id = service.addImage(title, image);
-        return new ResponseEntity<String>("image/" + id.toString(), HttpStatus.OK);
+        return "image/" + id.toString();
     }
 
     @GetMapping(value="/{id}", produces = MediaType.IMAGE_PNG_VALUE)

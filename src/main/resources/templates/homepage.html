@@ -11,7 +11,7 @@
     <div class="container text-center bg-info">
         <div class="row">
           <div class="col col-sm-2 bg-danger" >
-            [(${icon})]
+            <a href="/logout">Logout</a>
           </div>
           <div class="row col-lg bg-warning">
             <div class="col col-sm">
@@ -37,21 +37,24 @@
     </div>
 
     <!-- MAIN TITLE -->
-    <table class="table">
-      <tr>
-        <th>Tittle</th>
-        <th>Author</th>
-        <th>Rating</th>
-        <th>Image</th>
-      </tr>
-      <th:block th:each="feature : ${featured}">
+    <div  th:if="${user != 'Guest'}">
+      <p th:text="${user}"></p>
+      <table class="table">
         <tr>
-          <td th:text="${feature.tittle}"></td>
-          <td th:text="${feature.author.username}"></td>
-          <td th:text="${feature.rating}"></td>
-          <td><img th:src="@{${feature.mainImage}}"></td>
+          <th>Tittle</th>
+          <th>Author</th>
+          <th>Rating</th>
+          <th>Image</th>
         </tr>
-      </th:block>
-    </table>
+        <th:block th:each="feature : ${featured}">
+          <tr>
+            <td th:text="${feature.tittle}"></td>
+            <td th:text="${feature.author.username}"></td>
+            <td th:text="${feature.rating}"></td>
+            <td><img th:src="@{${feature.mainImage}}"></td>
+          </tr>
+        </th:block>
+      </table>
+    </div>
   </body>
 </html>
