@@ -20,14 +20,17 @@
             </form>
         </div>
     </nav>
-
+    <section>
+        <div  th:if="${user != 'Guest'}">
+            <p th:text="${user}"></p>
+        </div>
         <div class="signup-container">
             <div class="signup-header">
                 <img src="D:\NYOBA\image\Logo Nav Bar.jpg">
             <h1>SIGN UP</h1>
             <p>Please enter your name, email and password</p>
             </div>
-            <form class="signup-form">
+            <form action="#" th:action="@{/sign}" th:object="${user}" method="post">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" placeholder="Enter username" required>
@@ -47,7 +50,7 @@
             <button type="submit" class="signup-btn">SIGN UP</button>
             </form>
         </div>
-
+    </section>
 
 
 

@@ -38,7 +38,7 @@ public class HomepageController {
         model.addAttribute("icon", icon.getBody());
         model.addAttribute("featured", featured.getBody());
         model.addAttribute("community", community.getBody());
-        return "homepage";
+        return "Home";
     }
     
 

@@ -20,18 +20,22 @@
         <img src="D:\NYOBA\image\Logo Nav Bar.jpg">
         <h1>LOG IN</h1>
         <p>Get new recipes to try</p>
-        <form>
+        <div th:if="${param.failed != null}">
+          <p>Failed to logged in</p>
+        </div>
+        <form action="#" th:action="@{/login}" th:object="${request}" method="post">
           <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Email" required>
+            <label for="username">username</label>
+            <input type="username" id="username" name="username" placeholder="username" required>
           </div>
           <div class="form-group">
+            <ion-icon name="lock-closed-outline"></ion-icon>
             <label for="password">Password</label>
             <input type="password" id="password" name="password" placeholder="Password" required>
           </div>
           <button type="submit" class="btn-login">LOG IN</button>
         </form>
-        <a href="#" class="forgot-password">Lupa punya akun? Daftar</a>
+        <a href="/sign" class="forgot-password">tidak punya akun? Daftar</a>
       </div>
     <footer>
         <p>Copyright: © 2024 Cook Books</p>
