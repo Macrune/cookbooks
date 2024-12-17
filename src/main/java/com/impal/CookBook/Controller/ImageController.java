@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RequestMapping("/image")
 public class ImageController {
     @Autowired
-    ImageService service;
+    private ImageService service;
 
     @GetMapping("/add")
     public String addForm() {
@@ -44,15 +44,7 @@ public class ImageController {
         return new ResponseEntity<byte[]>(image.getImage(), HttpStatus.OK);
     }
     
-    @GetMapping(value="/svg/{id}")
-    public ResponseEntity<byte[]> getSVG(@PathVariable String id) {
-        final Image image = service.getImage(new ObjectId(id));
-        final String header = "<svg x=\"0\" y=\"0 ... ...</svg>";
-
-        return ResponseEntity.ok().header(header).body(image.getImage());
-    }
-    
-    @GetMapping(value="/svg/icon")
+    @GetMapping(value="/icon", produces = MediaType.IMAGE_PNG_VALUE)
     public ResponseEntity<byte[]> getIcon() {
         final Image image = service.getImage(new ObjectId("6745fa0443513141adebb498"));
         final String header = "<svg x=\"0\" y=\"0 ... ...</svg>";

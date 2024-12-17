@@ -85,7 +85,7 @@ public class RecipeController {
     }
 
     @PostMapping("/{imdbId}/addRating")
-    public String postMethodName(@PathVariable String imdbId, @CookieValue(value = "userCookie", defaultValue = "Guest") String cookie, int rating) {
+    public String addRating(@PathVariable String imdbId, @CookieValue(value = "userCookie", defaultValue = "Guest") String cookie, int rating) {
         try {
             service.addRating(imdbId, cookie, rating);
             return "redirect:/"+imdbId;

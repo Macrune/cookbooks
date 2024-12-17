@@ -6,12 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.index.TextIndexDefinition;
-import org.springframework.data.mongodb.core.index.TextIndexDefinition.TextIndexDefinitionBuilder;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
@@ -32,14 +28,6 @@ public class RecipeService {
 
     @Autowired
     private MongoTemplate mongoTemplate;
-
-    Logger logger = LoggerFactory.getLogger(RecipeService.class);
-
-    TextIndexDefinition textIndex = new TextIndexDefinitionBuilder()
-    .onField("title")
-    .onField("ingredients")
-    .onField("tags")
-    .build();
 
     public RecipeResponse convertToResponse(Recipe re) {
         UserInfoResponse author = userService.convertToResponse(re.getAuthor());

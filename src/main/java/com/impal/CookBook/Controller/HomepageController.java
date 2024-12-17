@@ -20,13 +20,10 @@ import com.impal.CookBook.Payload.RecipeCardResponse;
 @RequestMapping()
 public class HomepageController {
     @Autowired
-    RecipeService service;
+    private RecipeService service;
 
     @Autowired
-    UserService userService;
-
-    @Autowired
-    ImageController imageController;
+    private ImageController imageController;
 
     @GetMapping("/homepage")
     public String mainHomepage(@CookieValue(value = "userCookie", defaultValue = "Guest") String cookie, Model model) {
