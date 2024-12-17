@@ -258,16 +258,8 @@
           }
         });
 
-        // Load footer.html
-        fetch('Footer/index.html')
-          .then(response => response.text())
-          .then(data => {
-            document.getElementById('footer-container').innerHTML = data;
-          })
-          .catch(error => console.error('Error loading footer:', error));
+        
       </script>
 
-    <footer>
-        
-    </footer>
+      <iframe src="Footer/index.html" width="100%" height="500px" title="Footer"></iframe>
 </body>
