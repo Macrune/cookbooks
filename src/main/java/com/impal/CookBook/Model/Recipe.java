@@ -1,6 +1,7 @@
 package com.impal.CookBook.Model;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
@@ -23,7 +24,7 @@ public class Recipe {
     private ArrayList<String> tags;
     private String prepCategory;
     private int servings;
-    private double rating;
+    private Map<String, Integer> rating;
     private String mainImage;
     private ArrayList<String> ingredients;
     private ArrayList<String> body;
@@ -33,7 +34,7 @@ public class Recipe {
 
     public Recipe() {}
 
-    public Recipe(ObjectId id, User author, String tittle, String Description, int cookTime, ArrayList<String> tags, String prepCategory, int servings, double rating, String mainImage, ArrayList<String> ingredients, ArrayList<String> body, ArrayList<String> images, ArrayList<Comment> comments) {
+    public Recipe(ObjectId id, User author, String tittle, String Description, int cookTime, ArrayList<String> tags, String prepCategory, int servings, Map<String, Integer> rating, String mainImage, ArrayList<String> ingredients, ArrayList<String> body, ArrayList<String> images, ArrayList<Comment> comments) {
         this.id = id;
         this.imdbId = id.toString();
         this.author = author;
@@ -51,7 +52,7 @@ public class Recipe {
         this.comments = comments;
     }
 
-    public Recipe(ObjectId id, User author, String tittle, String Description, int cookTime, ArrayList<String> tags, String prepCategory, int servings, double rating, String mainImage, ArrayList<String> ingredients, ArrayList<String> body, ArrayList<String> images) {
+    public Recipe(ObjectId id, User author, String tittle, String Description, int cookTime, ArrayList<String> tags, String prepCategory, int servings, Map<String, Integer> rating, String mainImage, ArrayList<String> ingredients, ArrayList<String> body, ArrayList<String> images) {
         this.id = id;
         this.imdbId = id.toString();
         this.author = author;
@@ -69,7 +70,7 @@ public class Recipe {
         this.comments = new ArrayList<>();
     }
 
-    public Recipe(ObjectId id, String tittle, String Description, int cookTime, ArrayList<String> tags, String prepCategory, int servings, double rating, String mainImage, ArrayList<String> ingredients, ArrayList<String> body, ArrayList<String> images) {
+    public Recipe(ObjectId id, String tittle, String Description, int cookTime, ArrayList<String> tags, String prepCategory, int servings, Map<String, Integer> rating, String mainImage, ArrayList<String> ingredients, ArrayList<String> body, ArrayList<String> images) {
         this.id = id;
         this.imdbId = id.toString();
         this.tittle = tittle;
@@ -152,11 +153,11 @@ public class Recipe {
         this.servings = servings;
     }
 
-    public double getRating() {
+    public Map<String, Integer> getRating() {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(Map<String, Integer> rating) {
         this.rating = rating;
     }
 
