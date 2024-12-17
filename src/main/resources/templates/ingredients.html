@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cook Books</title>
+    <link rel="stylesheet" href="../static/styles/styleIngredients.css">
+    <style>
+        /* Custom styles for adjustments */
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .logo span {
+            color: black;
+            margin-top: -5px; /* Adjust spacing between Cook and Books */
+            font-size: 1.3rem;
+        }
+
+        .intro h1 {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .intro h1 span {
+            margin-top: -5px; /* Adjust spacing between ANY and INGREDIENT */
+            color: black; /* Set the color for INGREDIENT to black */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="logo">
+            Cook
+            <span>Books</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Recipes</a></li>
+                <li><a href="#" class="active">Ingredients</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Profile</a></li>
+            </ul>
+        </nav>
+        <div class="search">
+            <input type="text" placeholder="Search...">
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section class="intro">
+            <h1>
+                FROM ANY
+                <span>INGREDIENT</span>
+            </h1>
+            <p>With our diverse collection of recipes we have something for every ingredient.</p>
+            <div class="filters">
+                <button class="active">ALL</button>
+                <button>GARLIC</button>
+                <button>CHICKEN</button>
+                <button>POTATO</button>
+                <button>CARROT</button>
+                <button>EGGS</button>
+                <button>TEMPE</button>
+            </div>
+        </section>
+
+        <!-- Recipe Cards -->
+        <section class="recipes">
+            <div class="card">
+                <img src="./image/chicken1.jpg" alt="Savory Herb-Infused Chicken">
+                <h3>Savory Herb-Infused Chicken</h3>
+                <p>Indulge in the rich and savory symphony of flavors with our Savory Herb-Infused Chicken</p>
+                <span>⭐ (4.7)</span>
+                <span>40 MIN - EASY PREP - 4 SERVES</span>
+            </div>
+
+            <div class="card">
+                <img src="chicken2.jpg" alt="Lemon Garlic Grilled Chicken">
+                <h3>Lemon Garlic Grilled Chicken</h3>
+                <p>Experience the perfect blend of zesty lemon and aromatic garlic.</p>
+                <span>⭐ (4.4)</span>
+                <span>1 HOUR - HARD PREP - 4 SERVES</span>
+            </div>
+
+            <div class="card">
+                <img src="veggies.jpg" alt="Quinoa Veggie Stir-Fry">
+                <h3>Quinoa Veggie Stir-Fry</h3>
+                <p>Quick, wholesome, and bursting with flavors, perfect for dinner.</p>
+                <span>⭐ (4.5)</span>
+                <span>30 MIN - EASY PREP - 3 SERVES</span>
+            </div>
+
+            <div class="card">
+                <img src="smoothie.jpg" alt="Berry Bliss Smoothie Bowl">
+                <h3>Berry Bliss Smoothie Bowl</h3>
+                <p>A smoothie bowl that's not only visually appealing but also packed with antioxidants.</p>
+                <span>⭐ (4.3)</span>
+                <span>10 MIN - EASY PREP - 2 SERVES</span>
+            </div>
+
+            <div class="card">
+                <img src="spaghetti.jpg" alt="Spaghetti Aglio e Olio">
+                <h3>Spaghetti Aglio e Olio</h3>
+                <p>A minimalist yet flavorful dish with garlic, olive oil, and red pepper flakes.</p>
+                <span>⭐ (4.5)</span>
+                <span>20 MIN - EASY PREP - 2 SERVES</span>
+            </div>
+
+            <div class="card">
+                <img src="grilledveggies.jpg" alt="Grilled Veggies with Sauce">
+                <h3>Grilled Veggies with Sauce</h3>
+                <p>Served with zesty chimichurri sauce for gatherings.</p>
+                <span>⭐ (4.3)</span>
+                <span>25 MIN - MEDIUM PREP - 6 SERVES</span>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">Cook <span>Books</span></div>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Recipes</a></li>
+            <li><a href="#">Cooking Tips</a></li>
+            <li><a href="#">About Us</a></li>
+        </ul>
+        <p>&copy; 2024 Cook Book. All rights reserved.</p>
+    </footer>
+</body>
+</html>
