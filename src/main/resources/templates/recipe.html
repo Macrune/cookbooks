@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>We Are Cooking</title>
-	<link rel="stylesheet" type="text/css" href="./styles/style.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/styles/style.css}">
 
 </head>
 <body>
@@ -25,7 +25,7 @@
 				<sup>Recipe by <a href="http://www.filmoreandunion.com/recipe-of-the-week-chicken-pomegranate-and-spinach-salad/">Filmore &amp; Union</a>, July 2015</sup>
 			</div>
 			<div class="banner">
-				<img src="./images/salad_image.jpg">
+				<img th:src="@{${'http://localhost:8080/' + data.mainImage}}">
 			</div>
 			<div class="intro">
 				<p></p>

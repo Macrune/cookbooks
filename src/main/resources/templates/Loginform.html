@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cook Books - Recipe Website</title>
-    <link rel="stylesheet" href="./styles/styleForm.css"  >
+    <link rel="stylesheet" th:href="@{/styles/styleForm.css}"  >
 </head>
 <body>
     <nav class="navbar">
@@ -35,7 +35,7 @@
           </div>
           <button type="submit" class="btn-login">LOG IN</button>
         </form>
-        <a href="/sign" class="forgot-password">tidak punya akun? Daftar</a>
+        <a href="/register" class="forgot-password">tidak punya akun? Daftar</a>
       </div>
     <footer>
         <p>Copyright: © 2024 Cook Books</p>
