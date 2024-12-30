@@ -41,8 +41,8 @@ public class UserController {
 
 
     @GetMapping("/login")
-    public String loginForm() {
-        return "login";
+    public String Login() {
+        return "LoginForm";
     }
 
     @GetMapping("/logout")
@@ -54,7 +54,7 @@ public class UserController {
 
     @GetMapping("/register")
     public String signupForm() {
-        return "register";
+        return "sign";
     }
     
     @PostMapping("/login")
