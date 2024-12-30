@@ -22,7 +22,7 @@
 </head>
 <body>
   <div class="container p-4">
-    <form id="recipeForm" method="POST" th:object="${request}" th:action="/recipes/createRecipe">
+    <form id="recipeForm" method="POST" th:object="${request}" th:action="@{/recipes/createRecipe}">
       <!-- Main Image -->
       <div class="form-group mb-3">
         <label for="mainImage" class="form-label">Main Image</label>
@@ -103,7 +103,7 @@
       newInput.type = 'text';
       newInput.className = 'form-control mb-2';
       newInput.placeholder = `Ingredient ${ingredientCount}`;
-      newInput.name = 'ingredients[${ingredientCount}]'
+      newInput.name = 'ingredients['+ ingredientCount + ']'
       inputContainer.appendChild(newInput);
     });
 
@@ -118,13 +118,13 @@
       newStepInput.type = 'text';
       newStepInput.className = 'form-control mb-2';
       newStepInput.placeholder = `Step ${stepCount}`;
-      newStepInput.name = 'stepInput[$(stepCount)]'
+      newStepInput.name = 'stepInput['+ stepCount +']'
 
       const newStepFile = document.createElement('input');
       newStepFile.type = 'file';
       newStepFile.accept = 'image/*';
       newStepFile.className = 'form-control';
-      newStepFile.name = 'stepFile[${stepCount}]'
+      newStepFile.name = 'stepFile['+ stepCount +']'
 
       stepGroup.appendChild(newStepInput);
       stepGroup.appendChild(newStepFile);
