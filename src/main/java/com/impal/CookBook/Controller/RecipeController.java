@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 @Controller
-@RequestMapping("/api/recipes")
+@RequestMapping("/recipes")
 public class RecipeController {
 
     @Autowired
@@ -38,23 +38,25 @@ public class RecipeController {
     }
     
     @GetMapping("/findRecipe")    
-    public ResponseEntity<?> findByIngredient(@RequestParam String find) {
-        List<RecipeResponse> allRecipesResponse = new ArrayList<RecipeResponse>();
+    public String findByIngredient(@RequestParam String find, Model model) {
+        List<RecipeCardResponse> allRecipesResponse = new ArrayList<RecipeCardResponse>();
         try {
             if (find.isEmpty()) {
                 List<Recipe> allRes = service.getAllRecipe();
                 for (Recipe re : allRes) {
-                    allRecipesResponse.add(service.convertToResponse(re));
+                    allRecipesResponse.add(service.convertToResponseCard(re));
                 }
             }else {
                 List<Recipe> findRes = service.findByText(find);
                 for (Recipe re : findRes) {
-                    allRecipesResponse.add(service.convertToResponse(re));
+                    allRecipesResponse.add(service.convertToResponseCard(re));
                 }
             }
-            return new ResponseEntity<List<RecipeResponse>>(allRecipesResponse, HttpStatus.OK);
+            model.addAttribute("data", allRecipesResponse);
+            return "ingredients";
         }catch (Exception e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.OK);
+            model.addAttribute("data", null);
+            return "ingredients";
         }
     }
 
@@ -78,7 +80,17 @@ public class RecipeController {
     public String addToBookmark(@PathVariable String imdbId, @CookieValue(value = "userCookie", defaultValue = "Guest") String cookie) {
         try {
             service.addToBookmark(imdbId, cookie);
-            return "redirect:/"+imdbId;
+            return "redirect:/recipes/"+imdbId;
+        } catch (Exception e) {
+            return "redirect:/homepage";
+        }
+    }
+
+    @GetMapping("/{imdbId}/removeBookmark")
+    public String removeToBookmark(@PathVariable String imdbId, @CookieValue(value = "userCookie", defaultValue = "Guest") String cookie) {
+        try {
+            service.removeBookmark(imdbId, cookie);
+            return "redirect:/recipes/"+imdbId;
         } catch (Exception e) {
             return "redirect:/homepage";
         }
@@ -93,5 +105,11 @@ public class RecipeController {
             return "redirect:/homepage";
         }
     }
+
+    @GetMapping("/createRecipe")
+    public String getCreateRecipe() {
+        return "addRecipe";
+    }
+    
     
 }

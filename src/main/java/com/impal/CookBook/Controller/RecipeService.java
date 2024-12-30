@@ -102,13 +102,34 @@ public class RecipeService {
     public void addToBookmark(String imdbId, String cookie) throws Exception {
         try {
             Recipe rp = findRecipeByImdbId(imdbId);
+            User usr = userService.findUserByImdbId(cookie);
+            List<Recipe> bookmarks = usr.getBookmarks();
+
+            for(Recipe recipe : bookmarks) {
+                if (recipe.getImdbId().matches(rp.getImdbId())) {
+                    throw new Exception("addToBookmark.Recipe already bookmarks");
+                }
+            }
+
+            mongoTemplate.update(User.class)
+            .matching(Criteria.where("imdbId").is(cookie))
+            .apply(new Update().push("bookmarks").value(rp.getId()))
+            .first();
+
+        }catch (Exception e) {
+            throw new Exception("addToBookmark.Recipe not found!!");
+        }
+    }
+
+    public void removeBookmark(String imdbId, String cookie) throws Exception {
+        try {
+            Recipe rp = findRecipeByImdbId(imdbId);
 
             mongoTemplate.update(User.class)
                 .matching(Criteria.where("imdbId").is(cookie))
-                .apply(new Update().push("bookmarks").value(rp.getId()))
-                .first();
+                .apply(new Update().pull("bookmarks", rp.getId())).first();
         }catch (Exception e) {
-            throw new Exception("addToBookmark.Recipe not found!!");
+            throw new Exception("removeBookmark.Failed to remove bookmark!!");
         }
     }
 

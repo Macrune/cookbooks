@@ -29,7 +29,7 @@ public class HomepageController {
     public String mainHomepage(@CookieValue(value = "userCookie", defaultValue = "Guest") String cookie, Model model) {
         ResponseEntity<?> featured = getFeaturedRecipe();
         ResponseEntity<?> community = getCommunityRecipe();
-        ResponseEntity<?> icon = imageController.getIcon();
+        ResponseEntity<?> icon = imageController.getLogo();
         
         model.addAttribute("user", cookie);
         model.addAttribute("icon", icon.getBody());
