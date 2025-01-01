@@ -27,6 +27,9 @@ public class RecipeController {
     @Autowired
     private RecipeService service;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/allrecipe")    
     public ResponseEntity<List<RecipeResponse>> allRecipe() {
         List<Recipe> allRes = service.getAllRecipe();
@@ -67,16 +70,35 @@ public class RecipeController {
         try {
             Recipe rp = service.findRecipeByImdbId(imdbId);
             RecipeResponse response = service.convertToResponse(rp);
+
             if (cookie.equals("Guest")) {
                 model.addAttribute("isLoggedIn", false);
+                model.addAttribute("hasBookmarked", false);
             }else {
+                User user = userService.findUserByImdbId(cookie);
+                boolean cek = false;
+                for (Recipe recipe : user.getBookmarks()) {
+                    if (recipe.getImdbId().matches(imdbId)) {
+                        model.addAttribute("hasBookmarked", true);
+                        cek = true;
+                        break;
+                    }
+                }
+                if (!cek) {
+                    model.addAttribute("hasBookmarked", false);
+                }
+
                 model.addAttribute("isLoggedIn", true);
             }
+
             if (rp.getRating().containsKey(cookie)) {
                 model.addAttribute("userRating", rp.getRating().get(cookie));
             }else{
                 model.addAttribute("userRating", 0);
             }
+
+
+
             model.addAttribute("data", response);
             return "recipe";
         } catch (Exception e) {

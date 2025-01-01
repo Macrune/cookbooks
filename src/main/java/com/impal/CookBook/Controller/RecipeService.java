@@ -123,7 +123,7 @@ public class RecipeService {
             .first();
 
         }catch (Exception e) {
-            throw new Exception("addToBookmark.Recipe not found!!");
+            throw new Exception("addToBookmark." + e.getMessage());
         }
     }
 
