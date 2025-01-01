@@ -22,17 +22,12 @@ public class HomepageController {
     @Autowired
     private RecipeService service;
 
-    @Autowired
-    private ImageController imageController;
-
     @GetMapping()
     public String mainHomepage(@CookieValue(value = "userCookie", defaultValue = "Guest") String cookie, Model model) {
         ResponseEntity<?> featured = getFeaturedRecipe();
         ResponseEntity<?> community = getCommunityRecipe();
-        ResponseEntity<?> icon = imageController.getLogo();
         
         model.addAttribute("user", cookie);
-        model.addAttribute("icon", icon.getBody());
         model.addAttribute("featured", featured.getBody());
         model.addAttribute("community", community.getBody());
         return "Home";

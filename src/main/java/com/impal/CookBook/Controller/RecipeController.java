@@ -67,6 +67,11 @@ public class RecipeController {
         try {
             Recipe rp = service.findRecipeByImdbId(imdbId);
             RecipeResponse response = service.convertToResponse(rp);
+            if (cookie.equals("Guest")) {
+                model.addAttribute("isLoggedIn", false);
+            }else {
+                model.addAttribute("isLoggedIn", true);
+            }
             if (rp.getRating().containsKey(cookie)) {
                 model.addAttribute("rating", rp.getRating().get(cookie));
             }
