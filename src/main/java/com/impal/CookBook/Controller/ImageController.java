@@ -30,7 +30,7 @@ public class ImageController {
     public ResponseEntity<String> addImage(String title, MultipartFile image) throws IOException{
         final ObjectId id = service.addImage(title, image);
 
-        return new ResponseEntity<String>("image/" + id.toString(), HttpStatus.OK);
+        return new ResponseEntity<String>("/image/" + id.toString(), HttpStatus.OK);
     }
 
     @GetMapping(value="/{id}", produces = MediaType.IMAGE_PNG_VALUE)
