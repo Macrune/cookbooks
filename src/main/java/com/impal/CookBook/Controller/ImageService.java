@@ -1,6 +1,7 @@
 package com.impal.CookBook.Controller;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,15 @@ public class ImageService {
 
     public Image getImage(ObjectId id) {
         return repository.findById(id).get();
+    }
+
+    public String deleteImage(ObjectId id){
+        Optional<Image> img = repository.deleteImageById(id);
+        
+        if (img.isPresent()) {
+            return "Delete image successful";
+        }else {
+            return "Image not found";
+        }
     }
 }

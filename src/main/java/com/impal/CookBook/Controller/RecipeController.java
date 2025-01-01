@@ -19,8 +19,9 @@ import java.util.List;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
+
 @Controller
-@RequestMapping("/api/recipes")
+@RequestMapping("/recipes")
 public class RecipeController {
 
     @Autowired
@@ -38,23 +39,25 @@ public class RecipeController {
     }
     
     @GetMapping("/findRecipe")    
-    public ResponseEntity<?> findByIngredient(@RequestParam String find) {
-        List<RecipeResponse> allRecipesResponse = new ArrayList<RecipeResponse>();
+    public String findByIngredient(@RequestParam String find, Model model) {
+        List<RecipeCardResponse> allRecipesResponse = new ArrayList<RecipeCardResponse>();
         try {
             if (find.isEmpty()) {
                 List<Recipe> allRes = service.getAllRecipe();
                 for (Recipe re : allRes) {
-                    allRecipesResponse.add(service.convertToResponse(re));
+                    allRecipesResponse.add(service.convertToResponseCard(re));
                 }
             }else {
                 List<Recipe> findRes = service.findByText(find);
                 for (Recipe re : findRes) {
-                    allRecipesResponse.add(service.convertToResponse(re));
+                    allRecipesResponse.add(service.convertToResponseCard(re));
                 }
             }
-            return new ResponseEntity<List<RecipeResponse>>(allRecipesResponse, HttpStatus.OK);
+            model.addAttribute("data", allRecipesResponse);
+            return "ingredients";
         }catch (Exception e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.OK);
+            model.addAttribute("data", null);
+            return "ingredients";
         }
     }
 
@@ -64,13 +67,18 @@ public class RecipeController {
         try {
             Recipe rp = service.findRecipeByImdbId(imdbId);
             RecipeResponse response = service.convertToResponse(rp);
+            if (cookie.equals("Guest")) {
+                model.addAttribute("isLoggedIn", false);
+            }else {
+                model.addAttribute("isLoggedIn", true);
+            }
             if (rp.getRating().containsKey(cookie)) {
                 model.addAttribute("rating", rp.getRating().get(cookie));
             }
             model.addAttribute("data", response);
             return "recipe";
         } catch (Exception e) {
-            return "redirect:/homepage";
+            return "redirect:/";
         }
     }
 
@@ -78,20 +86,50 @@ public class RecipeController {
     public String addToBookmark(@PathVariable String imdbId, @CookieValue(value = "userCookie", defaultValue = "Guest") String cookie) {
         try {
             service.addToBookmark(imdbId, cookie);
-            return "redirect:/"+imdbId;
+            return "redirect:/recipes/"+imdbId;
         } catch (Exception e) {
-            return "redirect:/homepage";
+            return "redirect:/";
+        }
+    }
+
+    @GetMapping("/{imdbId}/removeBookmark")
+    public String removeToBookmark(@PathVariable String imdbId, @CookieValue(value = "userCookie", defaultValue = "Guest") String cookie) {
+        try {
+            service.removeBookmark(imdbId, cookie);
+            return "redirect:/recipes/"+imdbId;
+        } catch (Exception e) {
+            return "redirect:/";
         }
     }
 
     @PostMapping("/{imdbId}/addRating")
-    public String postMethodName(@PathVariable String imdbId, @CookieValue(value = "userCookie", defaultValue = "Guest") String cookie, int rating) {
+    public String addRating(@PathVariable String imdbId, @CookieValue(value = "userCookie", defaultValue = "Guest") String cookie, int rating) {
         try {
             service.addRating(imdbId, cookie, rating);
             return "redirect:/"+imdbId;
         } catch (Exception e) {
-            return "redirect:/homepage";
+            return "redirect:/";
         }
     }
+
+    @GetMapping("/createRecipe")
+    public String getCreateRecipe() {
+        return "addRecipe";
+    }
     
+    @PostMapping("/createRecipe")
+    public String postCreateRecipe(CreateRecipeRequest request, 
+            @CookieValue(value = "userCookie", defaultValue = "Guest") String cookie) {
+        try {
+            if (cookie.equals("Guest")) {
+                return "redirect:/";
+            }else {
+                String id = service.createRecipe(request, cookie);
+                return "redirect:/recipes/" + id;
+            }
+        }catch (Exception e) {
+            request.setTittle(e.getMessage());
+            return "redirect:/";
+        }
+    }
 }

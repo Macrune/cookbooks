@@ -10,4 +10,8 @@ public class CookBookApplication {
 		SpringApplication.run(CookBookApplication.class, args);
 	}
 
+	
+
 }
+
+
