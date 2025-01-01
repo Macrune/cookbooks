@@ -19,6 +19,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
+
 @Controller
 @RequestMapping("/recipes")
 public class RecipeController {
@@ -72,7 +73,7 @@ public class RecipeController {
             model.addAttribute("data", response);
             return "recipe";
         } catch (Exception e) {
-            return "redirect:/homepage";
+            return "redirect:/";
         }
     }
 
@@ -82,7 +83,7 @@ public class RecipeController {
             service.addToBookmark(imdbId, cookie);
             return "redirect:/recipes/"+imdbId;
         } catch (Exception e) {
-            return "redirect:/homepage";
+            return "redirect:/";
         }
     }
 
@@ -92,7 +93,7 @@ public class RecipeController {
             service.removeBookmark(imdbId, cookie);
             return "redirect:/recipes/"+imdbId;
         } catch (Exception e) {
-            return "redirect:/homepage";
+            return "redirect:/";
         }
     }
 
@@ -102,7 +103,7 @@ public class RecipeController {
             service.addRating(imdbId, cookie, rating);
             return "redirect:/"+imdbId;
         } catch (Exception e) {
-            return "redirect:/homepage";
+            return "redirect:/";
         }
     }
 
@@ -111,5 +112,19 @@ public class RecipeController {
         return "addRecipe";
     }
     
-    
+    @PostMapping("/createRecipe")
+    public String postCreateRecipe(CreateRecipeRequest request, 
+            @CookieValue(value = "userCookie", defaultValue = "Guest") String cookie) {
+        try {
+            if (cookie.equals("Guest")) {
+                return "redirect:/";
+            }else {
+                String id = service.createRecipe(request, cookie);
+                return "redirect:/recipes/" + id;
+            }
+        }catch (Exception e) {
+            request.setTittle(e.getMessage());
+            return "redirect:/";
+        }
+    }
 }

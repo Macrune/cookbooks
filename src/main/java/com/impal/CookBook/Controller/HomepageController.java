@@ -17,7 +17,7 @@ import com.impal.CookBook.Payload.RecipeCardResponse;
 
 
 @Controller
-@RequestMapping()
+@RequestMapping("/")
 public class HomepageController {
     @Autowired
     private RecipeService service;
@@ -25,7 +25,7 @@ public class HomepageController {
     @Autowired
     private ImageController imageController;
 
-    @GetMapping("/homepage")
+    @GetMapping()
     public String mainHomepage(@CookieValue(value = "userCookie", defaultValue = "Guest") String cookie, Model model) {
         ResponseEntity<?> featured = getFeaturedRecipe();
         ResponseEntity<?> community = getCommunityRecipe();

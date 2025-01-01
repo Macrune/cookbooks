@@ -6,11 +6,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 
 import com.impal.CookBook.Model.*;
 import com.impal.CookBook.Payload.*;
@@ -25,6 +28,9 @@ public class RecipeService {
 
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private ImageService imageService;
 
     @Autowired
     private MongoTemplate mongoTemplate;
@@ -144,6 +150,52 @@ public class RecipeService {
                 .first();
         }catch (Exception e) {
             throw new Exception("addRating.Recipe not found!!");
+        }
+    }
+
+    public String createRecipe(CreateRecipeRequest request, String cookie) throws Exception {
+        try {
+            User author = userService.findUserByImdbId(cookie);
+            ObjectId obId = new ObjectId();
+            String mainImage = new String();
+            ArrayList<String> ingredients = new ArrayList<>();
+            ArrayList<String> body = new ArrayList<>();
+            ArrayList<String> images = new ArrayList<>();
+
+            ArrayList<String> requestIng = request.getIngredients();
+            for (int i = 0; i < requestIng.size(); i++) {
+                ingredients.add(requestIng.get(i));
+            }
+
+            ArrayList<String> stepinput = request.getStepInput();
+            ArrayList<MultipartFile> stepFile = request.getStepFile();
+            for (int i = 0; i < stepinput.size(); i++) {
+                body.add(stepinput.get(i));
+
+                if (stepFile.get(i).isEmpty()) {
+                    images.add("");
+                }else {
+                    ObjectId imageId = imageService.addImage(obId.toString() + "_img" + i, stepFile.get(i));
+                    images.add("image/" + imageId.toString());
+                }
+            }
+
+            MultipartFile requestMainImage = request.getMainImage();
+            if (requestMainImage.isEmpty()) {
+                mainImage = "";
+            }else {
+                ObjectId imageId = imageService.addImage(obId.toString() + "_main", requestMainImage);
+                mainImage = "image/" + imageId.toString();
+            }
+
+            Recipe rcp = new Recipe(obId, author, request.getTittle(), request.getDescription(), request.getCookTime(), request.getTags(),
+                                    request.getPrepCategory() + " Prep", request.getServings(), mainImage, ingredients,
+                                    body, images);
+
+            repository.insert(rcp);
+            return obId.toString();
+        }catch (Exception e) {
+            throw new Exception(e.getMessage());
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.impal.CookBook.Model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.bson.types.ObjectId;
@@ -80,6 +81,24 @@ public class Recipe {
         this.prepCategory = prepCategory;
         this.servings = servings;
         this.rating = rating;
+        this.mainImage = mainImage;
+        this.ingredients = ingredients;
+        this.body = body;
+        this.images = images;
+        this.comments = new ArrayList<>();
+    }
+
+    public Recipe(ObjectId id, User author, String tittle, String Description, int cookTime, ArrayList<String> tags, String prepCategory, int servings, String mainImage, ArrayList<String> ingredients, ArrayList<String> body, ArrayList<String> images) {
+        this.id = id;
+        this.imdbId = id.toString();
+        this.author = author;
+        this.tittle = tittle;
+        this.Description = Description;
+        this.cookTime = cookTime;
+        this.tags = tags;
+        this.prepCategory = prepCategory;
+        this.servings = servings;
+        this.rating = new HashMap<String, Integer>();
         this.mainImage = mainImage;
         this.ingredients = ingredients;
         this.body = body;
