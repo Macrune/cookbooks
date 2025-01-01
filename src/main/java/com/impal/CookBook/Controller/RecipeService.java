@@ -142,14 +142,13 @@ public class RecipeService {
     public void addRating(String imdbId, String cookie, int rating) throws Exception {
         try {
             Recipe rp = findRecipeByImdbId(imdbId);
-            Map<String, Integer> rt = new HashMap<>();
+            Map<String, Integer> rt = rp.getRating();
             rt.put(cookie, rating);
             mongoTemplate.update(Recipe.class)
                 .matching(Criteria.where("imdbId").is(imdbId))
-                .apply(new Update().push("rating").value(rt))
-                .first();
+                .apply(new Update().set("rating", rt)).first();
         }catch (Exception e) {
-            throw new Exception("addRating.Recipe not found!!");
+            throw new Exception("addRating." + e.getMessage());
         }
     }
 

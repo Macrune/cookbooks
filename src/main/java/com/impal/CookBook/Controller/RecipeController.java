@@ -73,9 +73,9 @@ public class RecipeController {
                 model.addAttribute("isLoggedIn", true);
             }
             if (rp.getRating().containsKey(cookie)) {
-                model.addAttribute("rating", rp.getRating().get(cookie));
+                model.addAttribute("userRating", rp.getRating().get(cookie));
             }else{
-                model.addAttribute("rating", 0);
+                model.addAttribute("userRating", 0);
             }
             model.addAttribute("data", response);
             return "recipe";
@@ -105,11 +105,10 @@ public class RecipeController {
     }
 
     @PostMapping("/{imdbId}/addRating")
-    public String addRating(@PathVariable String imdbId, @CookieValue(value = "userCookie", defaultValue = "Guest") String cookie, String rating) {
+    public String addRating(@PathVariable String imdbId, @CookieValue(value = "userCookie", defaultValue = "Guest") String cookie, int rating) {
         try {
-            int rt = Integer.parseInt(rating);
-            service.addRating(imdbId, cookie, rt);
-            return "redirect:/"+imdbId;
+            service.addRating(imdbId, cookie, rating);
+            return "redirect:/recipes/"+imdbId;
         } catch (Exception e) {
             return "redirect:/";
         }
