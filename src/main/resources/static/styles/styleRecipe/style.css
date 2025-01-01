@@ -326,13 +326,6 @@ footer {
     color: #b4a191;
   }
   
-  .profile-description {
-    font-size: 1rem;
-    color: #666;
-    line-height: 1.5;
-    margin-bottom: 20px;
-  }
-  
   .learn-more-button {
     background-color: #fff;
     border: 2px solid #333;
@@ -446,4 +439,61 @@ footer {
     display: none;
   }
   /* END COMMENT SECTION */
+
+  /* START RATING */
+
+  .rating-container {
+    max-width: 300px;
+    margin: 20px;
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f4ed;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .star-rating {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: center;
+      gap: 8px;
+  }
+
+  .star-rating input {
+      display: none;
+  }
+
+  .star-rating label {
+      font-size: 30px;
+      color: #ddd;
+      cursor: pointer;
+  }
+
+  .star-rating label:before {
+      content: '★';
+  }
+
+  .star-rating input:checked ~ label,
+  .star-rating label:hover,
+  .star-rating label:hover ~ label {
+      color: #ffd700;
+  }
+
+  .submit-btn {
+    background-color: #fff;
+    border: 2px solid #333;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .submit-btn:hover {
+      background: #45a049;
+  }
+
+  /* END RATING */
 }
