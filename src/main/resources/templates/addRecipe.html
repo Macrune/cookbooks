@@ -22,7 +22,7 @@
 </head>
 <body>
   <div class="container p-4">
-    <form id="recipeForm" method="POST" th:object="${request}" th:action="@{/recipes/createRecipe}">
+    <form id="recipeForm" method="POST" th:object="${request}" th:action="@{/recipes/createRecipe}" enctype="multipart/form-data">
       <!-- Main Image -->
       <div class="form-group mb-3">
         <label for="mainImage" class="form-label">Main Image</label>
@@ -32,7 +32,7 @@
       <!-- Title -->
       <div class="form-group mb-3">
         <label for="recipeTitle" class="form-label">Title</label>
-        <input type="text" id="recipeTitle" class="form-control" placeholder="Title (Required)" name="title" required>
+        <input type="text" id="recipeTitle" class="form-control" placeholder="Title (Required)" name="tittle" required>
       </div>
 
       <!-- Description -->
@@ -57,9 +57,9 @@
       <div class="form-group mb-3">
         <label for="prepCategory" class="form-label">Preparation Category</label>
         <select id="prepCategory" class="form-control" name="prepCategory">
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
+          <option value="Easy">Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Hard">Hard</option>
         </select>
       </div>
 
@@ -98,7 +98,7 @@
   <script>
     document.getElementById('addButtonIngredient').addEventListener('click', () => {
       const inputContainer = document.getElementById('inputContainerIngredient');
-      const ingredientCount = inputContainer.children.length + 1;
+      const ingredientCount = inputContainer.children.length;
       const newInput = document.createElement('input');
       newInput.type = 'text';
       newInput.className = 'form-control mb-2';
@@ -109,7 +109,7 @@
 
     document.getElementById('addButtonStep').addEventListener('click', () => {
       const inputContainer = document.getElementById('inputContainerStep');
-      const stepCount = inputContainer.children.length + 1;
+      const stepCount = inputContainer.children.length;
 
       const stepGroup = document.createElement('div');
       stepGroup.className = 'mb-2';
