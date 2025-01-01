@@ -176,7 +176,7 @@ public class RecipeService {
                     images.add("");
                 }else {
                     ObjectId imageId = imageService.addImage(obId.toString() + "_img" + i, stepFile.get(i));
-                    images.add("image/" + imageId.toString());
+                    images.add("/image/" + imageId.toString());
                 }
             }
 
@@ -185,7 +185,7 @@ public class RecipeService {
                 mainImage = "";
             }else {
                 ObjectId imageId = imageService.addImage(obId.toString() + "_main", requestMainImage);
-                mainImage = "image/" + imageId.toString();
+                mainImage = "/image/" + imageId.toString();
             }
 
             Recipe rcp = new Recipe(obId, author, request.getTittle(), request.getDescription(), request.getCookTime(), request.getTags(),
