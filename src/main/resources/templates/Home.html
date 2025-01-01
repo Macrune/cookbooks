@@ -27,14 +27,17 @@
     <div class="featured-recipes">
         <h2 class="section-title">Featured Recipes</h2>
         <div class="recipe-grid">
-            
             <div class="recipe-card">
                 <div class="image-container">
-                    <img src="https://plu.sunsplash.com/premium_photo-1729611735489-fd5de207149e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Savory Herb-Infused Chicken" class="recipe-img">
+                    <img th:src="@{${featured[0].mainImage}}">
                 </div>
                 <div class="recipe-content">
-                    <h3 class="recipe-title">Savory Herb-Infused Chicken</h3>
-                    <p>Include the rich and savory symphony of flavors with our Savory Herb-Infused Chicken.</p>
+                    <div class ="nama"><td th:text="${featured[0].author.username}"></td></div>
+                    <h3 th:text="${featured[0].tittle}"> </h3>
+                    <p th:text="${featured[0].description}"></p>
+                    <div class="rating">
+                        icon <p th:text="${featured[0].rating}"></p>
+                    </div>
                     <div class="recipe-info">
                         <span>40 MIN</span>
                         <span>EASY PREP</span>
@@ -44,34 +47,37 @@
             </div>
             <div class="recipe-card">
                 <div class="image-container">
-                    <img src="decadent-chocolate-mousse.jpg" alt="Decadent Chocolate Mousse" class="recipe-img">
+                    <img th:src="@{${featured[0].mainImage}}">
                 </div>
                 <div class="recipe-content">
-                    <h3 class="recipe-title">Decadent Chocolate Mousse</h3>
-                    <p>Dive into the velvety indulgence of our Decadent Chocolate Mousse, a dessert that transcends sweetness.</p>
+                    <div class ="nama"><td th:text="${featured[0].author.username}"></td></div>
+                    <h3 th:text="${featured[0].tittle}"> </h3>
+                    <p th:text="${featured[0].description}"></p>
+                    <div class="rating">
+                        icon <p th:text="${featured[0].rating}"></p>
+                    </div>
                     <div class="recipe-info">
-                        <span>30 MIN</span>
-                        <span>MEDIUM PREP</span>
-                        <span>4 SERVINGS</span>
+                        <span>40 MIN</span>
+                        <span>EASY PREP</span>
+                        <span>3 SERVINGS</span>
                     </div>
                 </div>
-            </div>
+            </div> 
+           
         </div>
 
         <h2 class="section-title">Recipes from our Community</h2>
-        <th:block th:each="feature : ${featured}">
-            <tr>
-                <div class="recipe-grid">
+            <div class="recipe-grid">
                     <div class="recipe-card">
                         <div class="image-container">
-                            <img th:src="@{${feature.mainImage}}">
+                            <img th:src="@{${community[0].mainImage}}">
                         </div>
                         <div class="recipe-content">
-                            <div class ="nama">test<td th:text="${feature.author.username}"></td></div>
-                            <h3 class="recipe-title">Savory Herb-Isnfused Chicken<td th:text="${feature.tittle}"></td></h3>
-                            <p>Include the rich and savory symphony of flavors with our Savory Herb-Infused Chicken.<td th:text="${feature.description}"></td></p>
+                            <div class ="nama"><td th:text="${community[0].author.username}"></td></div>
+                            <h3 th:text="${community[0].tittle}"> </h3>
+                            <p th:text="${community[0].description}"></p>
                             <div class="rating">
-                                icon <td th:text="${feature.rating}"></td>
+                                icon <p th:text="${community[0].rating}"></p>
                             </div>
                             <div class="recipe-info">
                                 <span>40 MIN</span>
@@ -80,8 +86,43 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </tr>
+                    <div class="recipe-card">
+                        <div class="image-container">
+                            <img th:src="@{${community[1].mainImage}}">
+                        </div>
+                        <div class="recipe-content">
+                            <div class ="nama"><td th:text="${community[1].author.username}"></td></div>
+                            <h3 th:text="${community[1].tittle}"> </h3>
+                            <p th:text="${community[1].description}"></p>
+                            <div class="rating">
+                                icon <p th:text="${community[1].rating}"></p>
+                            </div>
+                            <div class="recipe-info">
+                                <span>40 MIN</span>
+                                <span>EASY PREP</span>
+                                <span>3 SERVINGS</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recipe-card">
+                        <div class="image-container">
+                            <img th:src="@{${community[2].mainImage}}">
+                        </div>
+                        <div class="recipe-content">
+                            <div class ="nama"><td th:text="${community[2].author.username}"></td></div>
+                            <h3 th:text="${community[2].tittle}"> </h3>
+                            <p th:text="${community[2].description}"></p>
+                            <div class="rating">
+                                icon <p th:text="${community[2].rating}"></p>
+                            </div>
+                            <div class="recipe-info">
+                                <span>40 MIN</span>
+                                <span>EASY PREP</span>
+                                <span>3 SERVINGS</span>
+                            </div>
+                        </div>
+                    </div>
+            </div>
     </div>
     
     <footer>

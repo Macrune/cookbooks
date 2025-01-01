@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 
 import com.impal.CookBook.Model.Comment;
 
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +23,8 @@ public class CommentController {
     private CommentService service;
 
     @PostMapping()
-    public ResponseEntity<?> createComment(@RequestBody Map<String, String> payload, @PathVariable String imdbId) {
+    public ResponseEntity<?> createComment(@RequestBody Map<String, String> payload, @PathVariable String imdbId,
+                                            @CookieValue(value = "userCookie", defaultValue = "Guest") String cookie) {
         try {
             return new ResponseEntity<Comment>(service.createComment(payload.get("commentBody"), payload.get("authorId"), imdbId), HttpStatus.CREATED);
         } catch (Exception e) {
