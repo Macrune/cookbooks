@@ -161,7 +161,7 @@ header .logo {
   margin: 0 auto;
 }
 
-.content .shop, .content .heading, .content .banner {
+.content .shop, .content .heading{
   font-size: 1rem;
 }
 
@@ -361,12 +361,12 @@ footer {
     font-size: 1.5rem;
     font-weight: bold;
     color: #333;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
   }
   
-  .comment-form, .reply-form {
+  /* .comment-form, .reply-form {
     margin-bottom: 20px;
-  }
+  } */
   
   .comment-input, .reply-input {
     width: 100%;
@@ -377,13 +377,13 @@ footer {
     margin-bottom: 10px;
   }
   
-  .comment-submit, .reply-submit {
+  .comment-submit{
     background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 5px;
     padding: 10px 15px;
-    font-size: 0.9rem;
+    font-size: 0.9rem;  
     cursor: pointer;
     transition: background-color 0.3s;
   }
@@ -401,42 +401,7 @@ footer {
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 15px;
-    margin-bottom: 15px;
     position: relative;
-  }
-  
-  .comment-content {
-    margin-bottom: 10px;
-  }
-  
-  .reply-button {
-    background: none;
-    border: none;
-    color: #007bff;
-    font-size: 0.9rem;
-    cursor: pointer;
-    margin-left: 10px;
-  }
-  
-  .reply-button:hover {
-    text-decoration: underline;
-  }
-  
-  .replies {
-    margin-left: 20px;
-    margin-top: 10px;
-  }
-  
-  .reply {
-    background-color: #f1f1f1;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
-  }
-  
-  .hidden {
-    display: none;
   }
   /* END COMMENT SECTION */
 
@@ -496,4 +461,9 @@ footer {
   }
 
   /* END RATING */
+
+  /* START INSTRUCTION */
+
+
+  /* END INTSTURCINO */
 }
