@@ -194,7 +194,7 @@ public class RecipeService {
 
             mongoTemplate.update(User.class)
                 .matching(Criteria.where("imdbId").is(author.getImdbId()))
-                .apply(new Update().push("myrecipes").value(rcp.getImdbId()))
+                .apply(new Update().push("myrecipes").value(rcp.getId()))
                 .first();
             
             return obId.toString();
