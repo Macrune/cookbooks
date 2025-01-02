@@ -42,7 +42,7 @@ public class RecipeController {
     }
     
     @GetMapping("/findRecipe")    
-    public String findByIngredient(@RequestParam String find, Model model) {
+    public String findByIngredient(@RequestParam(defaultValue = "") String find, Model model) {
         List<RecipeCardResponse> allRecipesResponse = new ArrayList<RecipeCardResponse>();
         try {
             if (find.isEmpty()) {

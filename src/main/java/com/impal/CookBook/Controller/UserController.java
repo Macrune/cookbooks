@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 
+
 @Controller
 @RequestMapping("")
 public class UserController {
@@ -111,6 +112,22 @@ public class UserController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping("/account/profile")
+    public String userProfile(@CookieValue(value = "userCookie", defaultValue = "Guest") String cookie, Model model) {
+        try {
+            if (cookie.equals("Guest")) {
+                return "redirect:/login";
+            }else {
+                @SuppressWarnings("unused")
+                User user = service.findUserByImdbId(cookie);
+                return "redirect:/account/" + cookie;
+            }
+        }catch (Exception e) {
+            return "redirect:/";
+        }
+    }
+    
 
     @GetMapping("/account/{imdbId}")
     public String findUser(@PathVariable String imdbId, @CookieValue(value = "userCookie", defaultValue = "Guest") String cookie,
