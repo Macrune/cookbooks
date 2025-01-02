@@ -8,7 +8,9 @@
 </head>
 <body>
     <nav class="navbar">
-        <a href="#" class="logo"><img src="D:\NYOBA\image\Logo Nav Bar.jpg"></a>
+      <a th:href="@{/}">
+        <img th:src="@{/image/logo}" class="logo">
+      </a>
         <div class="nav-links">
             <a href="#">Home</a>
             <a href="#">Recipes</a>
@@ -21,7 +23,7 @@
         </div>
     </nav>
     <div class="login-container">
-        <img src="D:\NYOBA\image\Logo Nav Bar.jpg">
+        <img th:src="@{/image/logo}" class="logo">
         <h1>LOG IN</h1>
         <p>Get new recipes to try</p>
         <div th:if="${param.failed != null}">

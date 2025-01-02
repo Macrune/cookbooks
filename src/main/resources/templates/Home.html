@@ -9,57 +9,98 @@
 </head>
 <body>
     <nav class="navbar">
-        <a href="#" class="logo">Cook Books</a>
+        <a th:href="@{/}">
+            <img th:src="@{/image/logo}" class="logo">
+        </a>
         <div class="nav-links">
             <a href="#">Home</a>
             <a href="#">Recipes</a>
             <a href="#">Ingredients</a>
-            <a href="#">About us</a>
+            <a href="#">Profile</a>
         </div>
     </nav>
 
     <section class="hero">
         <h1>Unleash Culinary Excellence</h1>
         <p>Explore a world of flavors, discover handcrafted recipes, and let the aroma of our passion for cooking fill your kitchen</p>
-        <a href="#" class="explore-btn">Explore Recipes</a>
+        <a th:href="@{/recipes/findRecipe}" class="explore-btn">Explore Recipes</a>
     </section>
 
     <div class="featured-recipes">
         <h2 class="section-title">Featured Recipes</h2>
         <div class="recipe-grid">
             <div class="recipe-card">
-                <div class="image-container">
-                    <img th:src="@{${featured[0].mainImage}}">
-                </div>
-                <div class="recipe-content">
-                    <div class ="nama"><td th:text="${featured[0].author.username}"></td></div>
-                    <h3 th:text="${featured[0].tittle}"> </h3>
-                    <p th:text="${featured[0].description}"></p>
+                <a th:href="@{'/recipes/' + ${featured[0].imdbId}}" class="recipe-link">
+                    <div class="image-container">
+                        <img th:src="@{${featured[0].mainImage}}">
+                    </div>
+                    <div class="recipe-content">
+                        <div class ="nama"><td th:text="${featured[0].author.username}"></td></div>
+                        <h3 th:text="${featured[0].tittle}"> </h3>
+                </a>
+                    <div class="description-container">
+                        <p class="description-text">
+                            <span th:text="${featured[0].description}"></span>
+                        </p>
+                        <button class="see-more-btn">See More</button>
+                    </div>
                     <div class="rating">
                         icon <p th:text="${featured[0].rating}"></p>
                     </div>
                     <div class="recipe-info">
-                        <span>40 MIN</span>
-                        <span>EASY PREP</span>
-                        <span>3 SERVINGS</span>
+                        <span th:text="${featured[0].cookTime + ' Min'}"> Minute</span>
+                        <span th:text="${featured[0].prepCategory}"></span>
+                        <span th:text="${featured[0].servings + 'Servings'}"> Servings</span>
                     </div>
                 </div>
             </div>
             <div class="recipe-card">
-                <div class="image-container">
-                    <img th:src="@{${featured[0].mainImage}}">
-                </div>
-                <div class="recipe-content">
-                    <div class ="nama"><td th:text="${featured[0].author.username}"></td></div>
-                    <h3 th:text="${featured[0].tittle}"> </h3>
-                    <p th:text="${featured[0].description}"></p>
+                <a th:href="@{'/recipe/' + ${featured[0].imdbId}}" class="recipe-link">
+                    <div class="image-container">
+                        <img th:src="@{${featured[1].mainImage}}">
+                    </div>
+                    <div class="recipe-content">
+                        <div class ="nama"><td th:text="${featured[1].author.username}"></td></div>
+                        <h3 th:text="${featured[1].tittle}"> </h3>
+                </a>
+                    <div class="description-container">
+                        <p class="description-text">
+                            <span th:text="${featured[1].description}"></span>
+                        </p>
+                        <button class="see-more-btn">See More</button>
+                    </div>
                     <div class="rating">
                         icon <p th:text="${featured[0].rating}"></p>
                     </div>
                     <div class="recipe-info">
-                        <span>40 MIN</span>
-                        <span>EASY PREP</span>
-                        <span>3 SERVINGS</span>
+                        <span th:text="${featured[1].cookTime +' Min'}"> Minute</span>
+                        <span th:text="${featured[1].prepCategory}"></span>
+                        <span th:text="${featured[1].servings + ' Servings'}"> Servings</span>
+                    </div>
+                </div>
+            </div> 
+            <div class="recipe-card">
+                <a th:href="@{'/recipes/' + ${featured[0].imdbId}}" class="recipe-link">
+                    <div class="image-container">
+                        <img th:src="@{${featured[2].mainImage}}">
+                    </div>
+                    <div class="recipe-content">
+                        <div class ="nama"><td th:text="${featured[2].author.username}"></td></div>
+                        <h3 th:text="${featured[2].tittle}"> </h3>
+                </a>
+                    <div class="description-container">
+                        <p class="description-text">
+                            <span th:text="${featured[2].description}"></span>
+                        </p>
+                        <button class="see-more-btn">See More</button>
+                    </div>
+                    <div class="rating">
+                        icon <p th:text="${featured[2].rating}"></p>
+                    </div>
+                    <div class="recipe-info">
+                        <span th:text="${featured[2].cookTime +' Min'}"> Minute</span>
+                        <span th:text="${featured[2].prepCategory}"></span>
+                        <span th:text="${featured[2].servings + ' Servings'}"> Servings</span>
                     </div>
                 </div>
             </div> 
@@ -69,56 +110,89 @@
         <h2 class="section-title">Recipes from our Community</h2>
             <div class="recipe-grid">
                     <div class="recipe-card">
-                        <div class="image-container">
-                            <img th:src="@{${community[0].mainImage}}">
-                        </div>
-                        <div class="recipe-content">
-                            <div class ="nama"><td th:text="${community[0].author.username}"></td></div>
-                            <h3 th:text="${community[0].tittle}"> </h3>
-                            <p th:text="${community[0].description}"></p>
-                            <div class="rating">
-                                icon <p th:text="${community[0].rating}"></p>
+
+                            <a th:href="@{'/recipes/' + ${community[0].imdbId}}" class="recipe-link">
+                                <div class="image-container">
+                                    <img th:src="@{${community[0].mainImage}}">
+                                </div>
+                                <div class="recipe-content">
+                                    <div class ="nama"><td th:text="${community[0].author.username}"></td></div>
+                                    <h3 th:text="${community[0].tittle}"> </h3>
+                            </a>
+
+
+                                <div class="description-container">
+                                    <p class="description-text">
+                                        <span th:text="${community[0].description}"></span>
+                                    </p>
+                                    <button class="see-more-btn">See More</button>
+                                </div>
+                                <div class="rating">
+                                    icon <p th:text="${community[0].rating}"></p>
+                                </div>
+                                <div class="recipe-info">
+                                    <span th:text="${community[0].cookTime + ' Min'}">  Minutes</span>
+                                    <span th:text="${community[0].prepCategory}"></span>
+                                    <span th:text="${community[0].servings + ' Servings'}" > Servings</span>
+                                </div>
                             </div>
-                            <div class="recipe-info">
-                                <span>40 MIN</span>
-                                <span>EASY PREP</span>
-                                <span>3 SERVINGS</span>
-                            </div>
-                        </div>
+
                     </div>
+        
+    
+
+
                     <div class="recipe-card">
-                        <div class="image-container">
-                            <img th:src="@{${community[1].mainImage}}">
-                        </div>
-                        <div class="recipe-content">
-                            <div class ="nama"><td th:text="${community[1].author.username}"></td></div>
-                            <h3 th:text="${community[1].tittle}"> </h3>
-                            <p th:text="${community[1].description}"></p>
+                        <a th:href="@{/recipe/' + ${community[1].imdbId}}" class="recipe-link">
+                            <div class="image-container">
+                                <img th:src="@{${community[1].mainImage}}">
+                            </div>
+                            <div class="recipe-content">
+                                <div class ="nama"><td th:text="${community[1].author.username}"></td></div>
+                                <h3 th:text="${community[1].tittle}"> </h3>
+                        </a>
+                            <div class="description-container">
+                                <p class="description-text">
+                                    <span th:text="${community[0].description}"></span>
+                                </p>
+                                <button class="see-more-btn">See More</button>
+                            </div>
                             <div class="rating">
                                 icon <p th:text="${community[1].rating}"></p>
                             </div>
                             <div class="recipe-info">
-                                <span>40 MIN</span>
-                                <span>EASY PREP</span>
-                                <span>3 SERVINGS</span>
+                                <span th:text="${community[1].cookTime + ' Min'}"> Minutes</span>
+                                <span th:text="${community[1].prepCategory}"></span>
+                                <span th:text="${community[1].servings + ' Servings'}"> Servings</span>
                             </div>
                         </div>
                     </div>
+
+
+
+
                     <div class="recipe-card">
-                        <div class="image-container">
-                            <img th:src="@{${community[2].mainImage}}">
-                        </div>
-                        <div class="recipe-content">
-                            <div class ="nama"><td th:text="${community[2].author.username}"></td></div>
-                            <h3 th:text="${community[2].tittle}"> </h3>
-                            <p th:text="${community[2].description}"></p>
+                        <a th:href="@{/recipe/' + ${community[2].imdbId}}" class="recipe-link">    
+                            <div class="image-container">
+                                <img th:src="@{${community[2].mainImage}}">
+                            </div>
+                            <div class="recipe-content">
+                                <div class ="nama"><td th:text="${community[2].author.username}"></td></div>
+                                <h3 th:text="${community[2].tittle}"> </h3>
+                        </a>
+                            <div class="description-container">
+                                <p class="description-text">
+                                    <span th:text="${community[0].description}"></span>
+                                </p>
+                                <button class="see-more-btn">See More</button>
+                            </div>
                             <div class="rating">
                                 icon <p th:text="${community[2].rating}"></p>
                             </div>
                             <div class="recipe-info">
-                                <span>40 MIN</span>
-                                <span>EASY PREP</span>
-                                <span>3 SERVINGS</span>
+                                <span th:text="${community[2].cookTime + ' Min'}" ></span>
+                                <span th:text="${community[2].prepCategory}"></span>
+                                <span th:text="${community[2].servings + ' Servings'}"></span>
                             </div>
                         </div>
                     </div>
@@ -128,5 +202,17 @@
     <footer>
         <p>Copyright: © 2024 Cook Books</p>
     </footer>
+
+    <script>
+        document.querySelectorAll('.see-more-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const descriptionText = this.previousElementSibling;
+                const isExpanded = descriptionText.classList.contains('expanded');
+                
+                descriptionText.classList.toggle('expanded');
+                this.textContent = isExpanded ? 'See More' : 'See Less';
+            });
+        });
+    </script>
 </body>
 </html>
