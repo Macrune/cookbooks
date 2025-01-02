@@ -23,12 +23,12 @@
                 <button class="add-btn" th:if="${isUser == true}"><a href="/recipes/createRecipe">+</a></button>
                 
             </div>
-            <div class="recipe-list">
-                <th:block th:each="myrecipe : ${myrecipes}">
+            <div class="recipe-list" th:if="${myRecipeNull == false}">
+                <th:block  th:each="myrecipe : ${myrecipes}">
                     <div class="recipe-card">
                         <img th:src="@{/data/user/image1.jpeg}" alt="Lemon Garlic Grilled Chicken" class="recipe-img">
                         <p class="recipe-author" th:text="${myrecipe.author.username}">By: Chef John</p>
-                        <h4 class="recipe-title" th:text="${myrecipe.title}">Lemon Garlic Grilled Chicken</h4>
+                        <h4 class="recipe-title" th:text="${myrecipe.tittle}">Lemon Garlic Grilled Chicken</h4>
                         <p class="recipe-description" th:text="${myrecipe.Description}" >A delicious grilled chicken recipe with lemon and garlic flavors to excite your taste buds.</p>
                         <div class="rating">
                             <span class="rating-icon">&#9733;</span>
@@ -36,7 +36,7 @@
                         </div>
                         <p class="recipe-meta"> </p>
                             <span th:text="${myrecipe.cookingTime}" > 1 hour</span> &bull;
-                            <span th:text="${myrecipe.difficulty}"> Easy Prep</span> &bull;
+                            <span th:text="${myrecipe.prepCategory}"> Easy Prep</span> &bull;
                             <span th:text="${myrecipe.servings}"> 4 servings</span>
                     </div>
                 </th:block>
@@ -47,12 +47,12 @@
             <div class="section-header">
                 <h3 class="bookmark-title">SAVED RECIPE</h3>
             </div>
-            <div class="recipe-list">
+            <div class="recipe-list" th:if="${bookmarksNull == false}" >
                 <th:block th:each="bookmark : ${bookmarks}"></th:block>
                     <div class="recipe-card">
                         <img th:src="@{/data/user/image1.jpeg}" alt="Lemon Garlic Grilled Chicken" class="recipe-img">
                         <p class="recipe-author" th:text="${bookmark.author.username}">By: Chef John</p>
-                        <h4 class="recipe-title" th:text="${bookmark.title}">Lemon Garlic Grilled Chicken</h4>
+                        <h4 class="recipe-title" th:text="${bookmark.tittle}">Lemon Garlic Grilled Chicken</h4>
                         <p class="recipe-description" th:text="${bookmark.Description}" >A delicious grilled chicken recipe with lemon and garlic flavors to excite your taste buds.</p>
                         <div class="rating">
                             <span class="rating-icon">&#9733;</span>
@@ -60,7 +60,7 @@
                         </div>
                         <p class="recipe-meta"> </p>
                             <span th:text="${bookmark.cookingTime}">30 min</span> &bull;
-                            <span th:text="${bookmark.difficulty}">Medium Prep</span> &bull;
+                            <span th:text="${bookmark.prepCategory}">Medium Prep</span> &bull;
                             <span th:text="${bookmark.servings}">2 servings</span>
                     </div>
                 <th:block>

@@ -145,6 +145,18 @@ public class UserController {
                 bookmarks.add(recipeService.convertToResponseCard(rp));
             }
             
+            if (myRecipes.isEmpty()) {
+                model.addAttribute("myRecipeNull", true);
+            }else {
+                model.addAttribute("myRecipeNull", false);
+            }
+
+            if (bookmarks.isEmpty()) {
+                model.addAttribute("bookmarksNull", true);
+            }else {
+                model.addAttribute("bookmarksNull", false);
+            }
+
             if (user.getImdbId().matches(cookie)) {
                 model.addAttribute("isUser", true);
             }else {
