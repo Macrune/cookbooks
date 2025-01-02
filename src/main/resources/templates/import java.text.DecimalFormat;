@@ -1,0 +1,26 @@
+import java.text.DecimalFormat;
+
+public class Printer {
+    private static final DecimalFormat df = new DecimalFormat("#.00");
+
+    public void printReceipt(Order order) {
+        System.out.println("---------- RECEIPT ----------");
+        System.out.println("Order ID: " + order.getOrderId());
+        System.out.println("Items:");
+
+        for (OrderDetail detail : order.getOrderDetails()) {
+            Product product = detail.getProduct();
+            String itemName = product.getName();
+            int quantity = detail.getQuantity();
+            double unitPrice = product.getPrice();
+            double subTotal = detail.subTotal();
+
+            System.out.printf("%-20s %2d x Rp%-8s = Rp%-8s\n", itemName, quantity, df.format(unitPrice), df.format(subTotal));
+        }
+
+        System.out.println("------------------------------");
+        System.out.printf("TOTAL:               Rp%-8s\n", df.format(order.calculateTotal()));
+        System.out.println("------------------------------");
+        System.out.println("Thank you for shopping with us!");
+    }
+}

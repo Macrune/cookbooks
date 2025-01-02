@@ -1,100 +1,156 @@
-@import url("reset.css");
-@import url("https://fonts.googleapis.com/css?family=Work+Sans:300,500");
-@import url("https://fonts.googleapis.com/css?family=Crete+Round:400,400i");
-
-* {
+body {
+    font-family: 'Work Sans', sans-serif;
+    background-color: #F0EBE1;
+    color: #333;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
-body {
-    background-color: #fffaf1;
-    color: #000;
-    font-family: 'Work Sans', Helvetica, Arial, Sans-Serif;
 }
 
 .profile-container {
-    max-width: 800px;
+    max-width: 900px;
     margin: 50px auto;
-    text-align: center;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
 .profile-header {
-    align-items: start;
-    gap: 20px; /* Memberi jarak antara foto profil dan teks */
-    padding: 10px;
-    text-align: left;
     display: flex;
-    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background: #f7f7f7;
+}
+
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .profile-username {
-    display: absolute;
-}
-.profile-pic {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    align-items: absolute;
+    flex-grow: 1;
+    text-align: left;
 }
 
 .username {
-    font-size: 28px;
-    font-weight: bold;
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-bottom: 0;
 }
 
-.user-meta, .user-stats {
-    color: gray;
-    font-size: 14px;
-    margin: 5px 0;
+.user-meta {
+    font-size: 0.9rem;
+    color: #666;
+
 }
 
 .edit-btn {
-    background-color: red;
-    color: white;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    color: #fff;
+    background: #d04a02;
     border: none;
-    padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
+    transition: background 0.3s;
 }
 
-.recipe-section {
-    margin-top: 20px;
+.edit-btn:hover {
+    background: #d04a02;
 }
 
-.my-recipe {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    text-align: start;
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #ddd;
 }
 
-.no-activity {
-    padding: 20px;
-    background-color: white;
-    border: 2px dashed gray;
+.my-recipe, .bookmark-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.add-btn {
+    background: #d04a02;
+    color: #fff;
+    border: none;
+    font-size: 1.2rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.add-btn:hover {
+    background: #d04a02;
+}
+
+.recipe-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    padding: 1.5rem;
+}
+
+.recipe-card {
+    background: #fff;
     border-radius: 10px;
-    margin-top: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    text-align: left;
 }
 
-.icon {
-    font-size: 40px;
+.recipe-card:hover {
+    transform: translateY(-5px);
 }
 
-.upload-btn {
-    background-color: red;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-    font-size: 16px;
+.recipe-img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    background: #ddd;
 }
 
-.iconpic {
-    width: 10%;
+.recipe-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 0.8rem 1rem 0.5rem;
+}
 
+.recipe-meta {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0 1rem 1rem;
+}
+
+.recipe-author {
+    font-size: 0.9rem;
+    color: #999;
+    margin: 0 1rem;
+}
+
+.recipe-description {
+    font-size: 0.9rem;
+    margin: 0 1rem 1rem;
+    color: #444;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    margin: 0 1rem;
+}
+
+.rating-icon {
+    font-size: 1rem;
+    color: #FFD700;
+    margin-right: 0.5rem;
 }

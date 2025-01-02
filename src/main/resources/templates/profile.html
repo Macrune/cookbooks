@@ -9,22 +9,73 @@
 <body>
     <div class="profile-container">
         <div class="profile-header">
-            <img src="style/siuu.jpg" alt="Profile Picture" class="profile-pic">
-            <div class="profile-username"> 
-                <h2 class="username">USERNAME</h2>
-                <p class="user-meta">@usernameid</p>
-                <a href="/logout" class="edit-btn">LOG OUT</a>
-                <p class="user-stats">0 followers 0 following</p>
+            <img th:src="@{/data/user/profilepic.png}" alt="Profile Picture" class="profile-pic">
+            <div class="profile-username">
+                <h2 class="username" id="username">USERNAME</h2>
+                <p class="user-meta" id="user-meta">@usernameid</p>
+                <a href="/logout" class="edit-btn" id="logout-btn">LOG OUT</a>
             </div>
         </div>
+
         <div class="recipe-section">
-            <h3 class="my-recipe">MY RECIPE</h3>
-            <div class="no-activity">
-                <img src="style/Group.png" alt="logo resep" class="iconpic">
-                <h1>THERE IS NO COOKING ACTIVITY YET</h1>
-                <form action="addRecipe.html" method="get">
-                    <button class="upload-btn" >ADD RECIPE</button>
-                </form>
+            <div class="section-header">
+                <h3 class="my-recipe">MY RECIPE</h3>
+                <button class="add-btn"><a href="/recipes/createRecipe">+</a></button>
+                
+            </div>
+            <div class="recipe-list">
+                <div class="recipe-card">
+                    <img th:src="@{/data/user/image1.jpeg}" alt="Lemon Garlic Grilled Chicken" class="recipe-img">
+                    <p class="recipe-author">By: Chef John</p>
+                    <h4 class="recipe-title">Lemon Garlic Grilled Chicken</h4>
+                    <p class="recipe-description">A delicious grilled chicken recipe with lemon and garlic flavors to excite your taste buds.</p>
+                    <div class="rating">
+                        <span class="rating-icon">&#9733;</span>
+                        <span>4.5</span>
+                    </div>
+                    <p class="recipe-meta">1 hour &bull; Easy Prep &bull; 4 servings</p>
+                </div>
+                <div class="recipe-card">
+                    <img th:src="@{/data/user/image1.jpeg}" alt="Savory Herb-Infused Chicken" class="recipe-img">
+                    <p class="recipe-author">By: Chef Lisa</p>
+                    <h4 class="recipe-title">Savory Herb-Infused Chicken</h4>
+                    <p class="recipe-description">A flavorful herb-infused chicken dish perfect for any occasion.</p>
+                    <div class="rating">
+                        <span class="rating-icon">&#9733;</span>
+                        <span>4.7</span>
+                    </div>
+                    <p class="recipe-meta">45 min &bull; Easy Prep &bull; 3 servings</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bookmark-section">
+            <div class="section-header">
+                <h3 class="bookmark-title">SAVED RECIPE</h3>
+            </div>
+            <div class="recipe-list">
+                <div class="recipe-card">
+                    <img th:src="@{/data/user/image1.jpeg}" alt="Crispy Honey Garlic Salmon" class="recipe-img">
+                    <p class="recipe-author">By: Chef Mark</p>
+                    <h4 class="recipe-title">Crispy Honey Garlic Salmon</h4>
+                    <p class="recipe-description">A crispy salmon dish glazed with honey garlic sauce that will melt in your mouth.</p>
+                    <div class="rating">
+                        <span class="rating-icon">&#9733;</span>
+                        <span>4.8</span>
+                    </div>
+                    <p class="recipe-meta">30 min &bull; Medium Prep &bull; 2 servings</p>
+                </div>
+                <div class="recipe-card">
+                    <img th:src="@{/data/user/image1.jpeg}" alt="Creamy Mushroom Pasta" class="recipe-img">
+                    <p class="recipe-author">By: Chef Anna</p>
+                    <h4 class="recipe-title">Creamy Mushroom Pasta</h4>
+                    <p class="recipe-description">Rich and creamy mushroom pasta that brings comfort to your dining table.</p>
+                    <div class="rating">
+                        <span class="rating-icon">&#9733;</span>
+                        <span>4.9</span>
+                    </div>
+                    <p class="recipe-meta">25 min &bull; Easy Prep &bull; 2 servings</p>
+                </div>
             </div>
         </div>
     </div>
