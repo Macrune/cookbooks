@@ -28,13 +28,16 @@
                     <div class="recipe-card">
                         <img th:src="@{/data/user/image1.jpeg}" alt="Lemon Garlic Grilled Chicken" class="recipe-img">
                         <p class="recipe-author" th:text="${myrecipe.author.username}">By: Chef John</p>
-                        <h4 class="recipe-title">Lemon Garlic Grilled Chicken</h4>
-                        <p class="recipe-description">A delicious grilled chicken recipe with lemon and garlic flavors to excite your taste buds.</p>
+                        <h4 class="recipe-title" th:text="${myrecipe.title}">Lemon Garlic Grilled Chicken</h4>
+                        <p class="recipe-description" th:text="${myrecipe.Description}" >A delicious grilled chicken recipe with lemon and garlic flavors to excite your taste buds.</p>
                         <div class="rating">
                             <span class="rating-icon">&#9733;</span>
-                            <span>4.5</span>
+                            <span th:text="${myrecipe.rating}">4.5 </span>
                         </div>
-                        <p class="recipe-meta">1 hour &bull; Easy Prep &bull; 4 servings</p>
+                        <p class="recipe-meta"> </p>
+                            <span th:text="${myrecipe.cookingTime}" > 1 hour</span> &bull;
+                            <span th:text="${myrecipe.difficulty}"> Easy Prep</span> &bull;
+                            <span th:text="${myrecipe.servings}"> 4 servings</span>
                     </div>
                 </th:block>
             </div>
@@ -45,28 +48,22 @@
                 <h3 class="bookmark-title">SAVED RECIPE</h3>
             </div>
             <div class="recipe-list">
-                <div class="recipe-card">
-                    <img th:src="@{/data/user/image1.jpeg}" alt="Crispy Honey Garlic Salmon" class="recipe-img">
-                    <p class="recipe-author">By: Chef Mark</p>
-                    <h4 class="recipe-title">Crispy Honey Garlic Salmon</h4>
-                    <p class="recipe-description">A crispy salmon dish glazed with honey garlic sauce that will melt in your mouth.</p>
-                    <div class="rating">
-                        <span class="rating-icon">&#9733;</span>
-                        <span>4.8</span>
+                <th:block th:each="bookmark : ${bookmarks}"></th:block>
+                    <div class="recipe-card">
+                        <img th:src="@{/data/user/image1.jpeg}" alt="Lemon Garlic Grilled Chicken" class="recipe-img">
+                        <p class="recipe-author" th:text="${bookmark.author.username}">By: Chef John</p>
+                        <h4 class="recipe-title" th:text="${bookmark.title}">Lemon Garlic Grilled Chicken</h4>
+                        <p class="recipe-description" th:text="${bookmark.Description}" >A delicious grilled chicken recipe with lemon and garlic flavors to excite your taste buds.</p>
+                        <div class="rating">
+                            <span class="rating-icon">&#9733;</span>
+                            <span th:text="${bookmark.rating}">4.8</span>
+                        </div>
+                        <p class="recipe-meta"> </p>
+                            <span th:text="${bookmark.cookingTime}">30 min</span> &bull;
+                            <span th:text="${bookmark.difficulty}">Medium Prep</span> &bull;
+                            <span th:text="${bookmark.servings}">2 servings</span>
                     </div>
-                    <p class="recipe-meta">30 min &bull; Medium Prep &bull; 2 servings</p>
-                </div>
-                <div class="recipe-card">
-                    <img th:src="@{/data/user/image1.jpeg}" alt="Creamy Mushroom Pasta" class="recipe-img">
-                    <p class="recipe-author">By: Chef Anna</p>
-                    <h4 class="recipe-title">Creamy Mushroom Pasta</h4>
-                    <p class="recipe-description">Rich and creamy mushroom pasta that brings comfort to your dining table.</p>
-                    <div class="rating">
-                        <span class="rating-icon">&#9733;</span>
-                        <span>4.9</span>
-                    </div>
-                    <p class="recipe-meta">25 min &bull; Easy Prep &bull; 2 servings</p>
-                </div>
+                <th:block>
             </div>
         </div>
     </div>
