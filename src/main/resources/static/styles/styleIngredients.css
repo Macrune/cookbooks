@@ -141,6 +141,34 @@ nav ul li a:hover, nav ul li a.active {
     color: #333;
 }
 
+/* No Recipe Found Message */
+.no-recipe {
+    text-align: center;
+    color: black;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 2rem;
+    display: none; /* Awalnya disembunyikan */
+    padding: 1rem;
+    background: #FFFBF2;
+    border: 1px solid #000000;
+    border-radius: 8px;
+}
+
+.no-recipe.visible {
+    display: block; /* Tampilkan pesan jika diperlukan */
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 /* Footer */
 footer {
     text-align: center;
