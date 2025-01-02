@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cook Books - Recipe Website</title>
     <link rel="stylesheet" th:href="@{/styles/styleForm.css}"  >
+    <script type="module" src="https://cdn.jsdelivr.net/npm/microsoft-cognitiveservices-speech-sdk@latest/distrib/browser/microsoft.cognitiveservices.speech.sdk.bundle-min.js"></script>
 </head>
 <body>
     <nav class="navbar">
@@ -32,7 +33,7 @@
         <form action="#" th:action="@{/login}" th:object="${request}" method="post">
           <div class="form-group">
             <label for="username">username</label>
-            <input type="username" id="username" name="username" placeholder="username" required>
+            <input type="username" id="STT" name="username" placeholder="username" required>
           </div>
           <div class="form-group">
             <ion-icon name="lock-closed-outline"></ion-icon>
@@ -41,10 +42,66 @@
           </div>
           <button type="submit" class="btn-login">LOG IN</button>
         </form>
+        <button id="startRecognizeOnceAsyncButton">Start Text to Speech</button>
         <a href="/register" class="forgot-password">tidak punya akun? Daftar</a>
       </div>
     <footer>
         <p>Copyright: © 2024 Cook Books</p>
     </footer>
+
+    <script>
+      var startRecognizeOnceAsyncButton;
+
+      // subscription key and region for speech services.
+      var subscriptionKey, serviceRegion;
+      var SpeechSDK;
+      var recognizer;
+
+      document.addEventListener("DOMContentLoaded", function () {
+      startRecognizeOnceAsyncButton = document.getElementById("startRecognizeOnceAsyncButton");
+      subscriptionKey = "G6WRVtA1qMrvyU4t2GgoUFzAy6UxZLn1TiiHYvl5ZhqN4RG1OJCRJQQJ99BAACqBBLyXJ3w3AAAYACOG5lPJ";
+      serviceRegion = "southeastasia";
+      test = document.getElementById("STT")
+
+      startRecognizeOnceAsyncButton.addEventListener("click", function () {
+          startRecognizeOnceAsyncButton.disabled = true;
+          
+          if (subscriptionKey.value === "" || subscriptionKey.value === "subscription") {
+          alert("Please enter your Microsoft Cognitive Services Speech subscription key!");
+          return;
+          }
+          var speechConfig = SpeechSDK.SpeechConfig.fromSubscription(subscriptionKey, serviceRegion);
+          speechConfig.speechRecognitionLanguage = "en-US";
+          var audioConfig  = SpeechSDK.AudioConfig.fromDefaultMicrophoneInput();
+          recognizer = new SpeechSDK.SpeechRecognizer(speechConfig, audioConfig);
+
+          recognizer.recognizeOnceAsync(
+          function (result) {
+              startRecognizeOnceAsyncButton.disabled = false;
+              window.console.log(result);
+              test.value = result.text.replace('.', '')
+              recognizer.close();
+              recognizer = undefined;
+          },
+          function (err) {
+              startRecognizeOnceAsyncButton.disabled = false;
+              test.value = result.text
+              window.console.log(err);
+
+              recognizer.close();
+              recognizer = undefined;
+          });
+      });
+
+      if (!!window.SpeechSDK) {
+          SpeechSDK = window.SpeechSDK;
+          startRecognizeOnceAsyncButton.disabled = false;
+
+          // document.getElementById('content').style.display = 'block';
+          // document.getElementById('warning').style.display = 'none';
+      }
+      });
+
+    </script>
 </body>
 </html>

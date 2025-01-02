@@ -68,11 +68,6 @@
 			<artifactId>spring-security-crypto</artifactId>
 			<version>5.7.3</version>
 		</dependency>
-		<dependency>
-			<groupId>com.microsoft.cognitiveservices.speech</groupId>
-			<artifactId>client-sdk</artifactId>
-			<version>1.42.0</version>
-        </dependency>
 	</dependencies>
 
 	<build>
