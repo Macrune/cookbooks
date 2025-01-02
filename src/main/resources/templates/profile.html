@@ -9,43 +9,34 @@
 <body>
     <div class="profile-container">
         <div class="profile-header">
-            <img th:src="@{/data/user/profilepic.png}" alt="Profile Picture" class="profile-pic">
+            <img th:src="@{${user.profilePic}}" alt="Profile Picture" class="profile-pic">
             <div class="profile-username">
-                <h2 class="username" id="username">USERNAME</h2>
-                <p class="user-meta" id="user-meta">@usernameid</p>
-                <a href="/logout" class="edit-btn" id="logout-btn">LOG OUT</a>
+                <h2 class="username" id="username" th:text="${user.username}">USERNAME</h2>
+                <p class="user-meta" id="user-meta" th:text="'@' +${user.imdbId}">@usernameid</p>
+                <a href="/logout" class="edit-btn" id="logout-btn" th:if="${isUser == true}">LOG OUT</a>
             </div>
         </div>
 
         <div class="recipe-section">
             <div class="section-header">
                 <h3 class="my-recipe">MY RECIPE</h3>
-                <button class="add-btn"><a href="/recipes/createRecipe">+</a></button>
+                <button class="add-btn" th:if="${isUser == true}"><a href="/recipes/createRecipe">+</a></button>
                 
             </div>
             <div class="recipe-list">
-                <div class="recipe-card">
-                    <img th:src="@{/data/user/image1.jpeg}" alt="Lemon Garlic Grilled Chicken" class="recipe-img">
-                    <p class="recipe-author">By: Chef John</p>
-                    <h4 class="recipe-title">Lemon Garlic Grilled Chicken</h4>
-                    <p class="recipe-description">A delicious grilled chicken recipe with lemon and garlic flavors to excite your taste buds.</p>
-                    <div class="rating">
-                        <span class="rating-icon">&#9733;</span>
-                        <span>4.5</span>
+                <th:block th:each="myrecipe : ${myrecipes}">
+                    <div class="recipe-card">
+                        <img th:src="@{/data/user/image1.jpeg}" alt="Lemon Garlic Grilled Chicken" class="recipe-img">
+                        <p class="recipe-author" th:text="${myrecipe.author.username}">By: Chef John</p>
+                        <h4 class="recipe-title">Lemon Garlic Grilled Chicken</h4>
+                        <p class="recipe-description">A delicious grilled chicken recipe with lemon and garlic flavors to excite your taste buds.</p>
+                        <div class="rating">
+                            <span class="rating-icon">&#9733;</span>
+                            <span>4.5</span>
+                        </div>
+                        <p class="recipe-meta">1 hour &bull; Easy Prep &bull; 4 servings</p>
                     </div>
-                    <p class="recipe-meta">1 hour &bull; Easy Prep &bull; 4 servings</p>
-                </div>
-                <div class="recipe-card">
-                    <img th:src="@{/data/user/image1.jpeg}" alt="Savory Herb-Infused Chicken" class="recipe-img">
-                    <p class="recipe-author">By: Chef Lisa</p>
-                    <h4 class="recipe-title">Savory Herb-Infused Chicken</h4>
-                    <p class="recipe-description">A flavorful herb-infused chicken dish perfect for any occasion.</p>
-                    <div class="rating">
-                        <span class="rating-icon">&#9733;</span>
-                        <span>4.7</span>
-                    </div>
-                    <p class="recipe-meta">45 min &bull; Easy Prep &bull; 3 servings</p>
-                </div>
+                </th:block>
             </div>
         </div>
 

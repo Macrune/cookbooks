@@ -147,12 +147,14 @@ public class UserController {
             
             if (user.getImdbId().matches(cookie)) {
                 model.addAttribute("isUser", true);
+            }else {
+                model.addAttribute("isUser", false);
             }
 
             model.addAttribute("myrecipes", myRecipes);
             model.addAttribute("bookmarks", bookmarks);
             model.addAttribute("cookie", cookie);
-            model.addAttribute("userResponse", userResponse);
+            model.addAttribute("user", userResponse);
             return "profile";
         }catch (Exception e) {
             return "redirect:/";
