@@ -191,6 +191,12 @@ public class RecipeService {
                                     body, images);
 
             repository.insert(rcp);
+
+            mongoTemplate.update(User.class)
+                .matching(Criteria.where("imdbId").is(author.getImdbId()))
+                .apply(new Update().push("myrecipes").value(rcp.getImdbId()))
+                .first();
+            
             return obId.toString();
         }catch (Exception e) {
             throw new Exception(e.getMessage());

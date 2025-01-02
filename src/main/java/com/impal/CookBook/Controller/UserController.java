@@ -168,8 +168,10 @@ public class UserController {
             model.addAttribute("cookie", cookie);
             model.addAttribute("user", userResponse);
             return "profile";
+            // return new ResponseEntity<Model>(model, HttpStatus.OK);
         }catch (Exception e) {
             return "redirect:/";
+            // return new ResponseEntity<Model>(model, HttpStatus.OK);
         }
     }
     
