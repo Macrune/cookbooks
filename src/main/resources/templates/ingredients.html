@@ -80,7 +80,40 @@
         </section>
 
         <!-- Recipe Cards -->
-        <section class="recipes">
+        <div class="recipe-grid">
+            <th:block th:each="recipe : ${data}">
+            <div class="card">
+                <a th:href="@{'/recipes/' + ${recipe.imdbId}}" class="recipe-link">
+                    <div class="image-container">
+                        <img th:src="@{${recipe.mainImage}}">
+                    </div>
+                    <div class="recipe-content">
+                        <div class ="nama"><td th:text="${recipe.author.username}"></td></div>
+                        <h3 th:text="${recipe.tittle}"> </h3>
+                </a>
+                    <div class="description-container">
+                        <p class="description-text">
+                            <span th:text="${recipe.description}"></span>
+                        </p>
+                        <button class="see-more-btn">See More</button>
+                    </div>
+                    <div class="rating">
+                        <span th:text="'⭐' + ${recipe.rating}"></span>
+                    </div>
+                    <div class="recipe-info">
+                        <span th:text="${recipe.cookTime + ' Min'}"> Minute</span>
+                        <span th:text="${recipe.prepCategory}"></span>
+                        <span th:text="${recipe.servings + ' Servings'}"> Servings</span>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+
+
+
+
+        <!-- <section class="recipes">
             <div class="no-recipe">No Recipe Found</div>
             <div class="card">
                 <img src="./image/chicken1.jpg" alt="Savory Herb-Infused Chicken">
@@ -129,7 +162,7 @@
                 <span>⭐ (4.3)</span>
                 <span>25 MIN - MEDIUM PREP - 6 SERVES</span>
             </div>
-        </section>
+        </section> -->
     </main>
 
     <!-- Footer -->

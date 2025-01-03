@@ -43,7 +43,7 @@
         <form th:action="@{/login}" th:object="${request}" method="post">
           <div class="form-group">
             <label for="username">username</label>
-            <input type="username" id="STT" name="username" placeholder="username" required>
+            <input type="username" id="username" name="username" placeholder="username" required>
           </div>
           <div class="form-group">
             <ion-icon name="lock-closed-outline"></ion-icon>
@@ -52,7 +52,6 @@
           </div>
           <button type="submit" class="btn-login">LOG IN</button>
         </form>
-        <button id="startRecognizeOnceAsyncButton">Start Text to Speech</button>
         <a href="/register" class="forgot-password">tidak punya akun? Daftar</a>
       </div>
     <footer>
