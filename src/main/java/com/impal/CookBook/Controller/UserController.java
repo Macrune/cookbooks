@@ -145,6 +145,18 @@ public class UserController {
                 bookmarks.add(recipeService.convertToResponseCard(rp));
             }
             
+            if (myRecipes.isEmpty()) {
+                model.addAttribute("myRecipeNull", true);
+            }else {
+                model.addAttribute("myRecipeNull", false);
+            }
+
+            if (bookmarks.isEmpty()) {
+                model.addAttribute("bookmarksNull", true);
+            }else {
+                model.addAttribute("bookmarksNull", false);
+            }
+
             if (user.getImdbId().matches(cookie)) {
                 model.addAttribute("isUser", true);
             }else {
@@ -156,8 +168,10 @@ public class UserController {
             model.addAttribute("cookie", cookie);
             model.addAttribute("user", userResponse);
             return "profile";
+            // return new ResponseEntity<Model>(model, HttpStatus.OK);
         }catch (Exception e) {
             return "redirect:/";
+            // return new ResponseEntity<Model>(model, HttpStatus.OK);
         }
     }
     

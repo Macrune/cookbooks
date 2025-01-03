@@ -1,66 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>We Are Cooking</title>
+	<title>Recipe</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/styles/styleRecipe/style.css}">
 
 </head>
 <body>
-
 	<div id="content-container">
 		<div class="content">
 			<div class="heading">
 				<h2 th:text="${data.tittle}"></h2>
-				<p th:text="${data.description}"></p>
+				&nbsp
 				<div class="recipe-meta">
-					<p th:text="${data.cookTime}"></p>
-					<p th:text="${data.prepCategory}"></p>
-					<p th:text="${data.servings}"></p>
+					<div th:text="${data.cookTime+' Minutes'}"></div>
+					<div th:text="${data.prepCategory}"></div>
+					<div th:text="${data.servings+' Servings'}"></div>
 				</div>
 			</div>
 			<div class="banner">
 				<img th:src="${data.mainImage}">
 			</div>
 			<div class="intro">
-				<p></p>
-				<p>Picture succulent chicken infused with the bright notes of lemon and the aromatic richness of garlic. It's a symphony of flavors that will have your taste buds dancing. Join us as we delve into the art of roasting and uncover the secrets behind creating a masterpiece that's not just a meal but a celebration of culinary craftsmanship.</p>
-				<p>As you preheat your oven, envision the kitchen filling with the tantalizing aroma of herbs and citrus, setting the stage for a delightful meal that transcends the ordinary. The anticipation builds as the chicken roasts to golden perfection, promising a dining experience that marries simplicity with sophistication. Whether you're a seasoned chef or a kitchen novice, this recipe invites you to become a culinary artist, creating a masterpiece that will leave a lasting impression on your guests and loved ones.</p> 
-				<hr>
-
-				<h3>Let’s go over the basics– the do’s, and the don’ts– for How to Cook a chicken</h3>
-				<h4>DO'S</h4>
-				<Ul>
-					<li>
-						<h5 class="par1">Thoroughly Clean Hands and Surfaces: </h5>
-						<a>Before and after handling raw chicken, ensure your hands, utensils, and surfaces are clean to prevent cross-contamination.</a>
-						<p>&nbsp</p>
-						<h5>Use Separate Cutting Boards:  </h5>
-						<a>Dedicate specific cutting boards for raw chicken to avoid the spread of bacteria to other foods.</a>
-						<p>&nbsp</p>
-						<h5>Thaw Chicken at Room Temperature: </h5>
-						<a>Avoid thawing chicken on the counter. Instead, thaw it in the refrigerator to prevent bacterial growth. </a>
-						<p>&nbsp</p>
-						<h5>Overcrowd the Pan: </h5>
-						<a>When roasting, ensure the chicken pieces have space between them for even cooking. Overcrowding can lead to unevenly cooked chicken.</a>
-					</li>
-				</Ul>
-				<P>&nbsp</P>
-				<P>&nbsp</P>
-				<h4>DON'TS</h4>
-				<ul>
-					<li><h5 class="par1">Thoroughly Clean Hands and Surfaces: </h5>
-						<a>Before and after handling raw chicken, ensure your hands, utensils, and surfaces are clean to prevent cross-contamination.</a>
-						<p>&nbsp</p>
-						<h5 class="par1">Thaw Chicken at Room Temperature: </h5>
-						<a>Avoid thawing chicken on the counter. Instead, thaw it in the refrigerator to prevent bacterial growth.</a>
-						<p>&nbsp</p>
-						<h5 class="par1">Overcrowd the Pan:  </h5>
-						<a>When roasting, ensure the chicken pieces have space between them for even cooking. Overcrowding can lead to unevenly cooked chicken.</a>
-						<p>&nbsp</p>
-					</li>
-				</ul>
-				<hr>
-
+				<div class="description">
+					<p th:text="${data.description}"></p>
+				</div>
 				<div class="instructions">
 					<h3>INSTRUCTIONS</h3>
 					<div class="instructions-body">
@@ -118,10 +81,10 @@
 
 					<div class="ownerInformation" name="ownerInformation">
 						<div class="profile-card">
-							<img th:src="${data.profilePic}" alt="Profile Image" class="profile-image" />
+							<img th:src="${data.author.profilePic}" alt="Profile Image" class="profile-image" />
 							<div class="profile-content">
-							  <h2 th:text="${data.author}" class="profile-name"></h2>
-							  <a class="learn-more-button" th:href="@{/}">Learn More</a>
+							  <h2 th:text="${data.author.username}" class="profile-name"></h2>
+							  <a class="learn-more-button" th:href="@{'/account/'+${data.author.imdbId}}">Learn More</a>
 							</div>
 						</div>
 					</div>
@@ -137,33 +100,6 @@
 							<p th:text="${ingr}" class="body-ingredients"></p>
 						</div>
 					</th:block>
-
-				<!-- <strong>For the marinade:</strong>
-
-				<ul>
-					<li>2 tbsp freshly squeezed lemon juice</li>
-					<li>1 tsp fresh oregano, chopped</li>
-					<li>1 tsp garlic, crushed</li>
-					<li>Pinch of salt and pepper to taste</li>
-				</ul>
-
-				<strong>For the salad:</strong>
-				<ul>
-					<li>6oz baby spinach</li>
-					<li>4 chicken breasts</li>
-					<li>Handful of pomegranate arils</li>
-					<li>&frac12; red onion, thinly sliced</li>
-					<li>1 avocado, chopped</li>
-				</ul>
-
-				<strong>For the dressing:</strong>
-				<ul>
-					<li>1 tbsp balsamic vinegar</li>
-					<li>1 tsp raw honey</li>
-					<li>2 tbsp extra virgin olive oil</li>
-					<li>Salt and pepper, to taste</li>
-				</ul> -->
-							
 			</div>
 		</div>
 		
@@ -187,9 +123,5 @@
 			</th:block>
 		</section>
 	</div>
-
-	<footer>
-		<div class="credits">Made for "The Iron Yard" | Images: Pexels.com | Recipe: filmoreandunion.com</div>
-	</footer>
 </body>
 </html>
