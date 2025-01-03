@@ -55,7 +55,7 @@
             </ul>
         </nav>
         <div class="search">
-            <input type="text" placeholder="Search...">
+            <input type="text" placeholder="Search..." th:value="${find}">
         </div>
     </header>
 
@@ -178,7 +178,6 @@
                     button.classList.add('active');
                     const category = button.textContent.trim().toUpperCase();
 
-                    // let visibleCount = 0;
                     if (category == "ALL") {
                         searchBar.value = "";
                     }else {
@@ -199,6 +198,9 @@
                     // noRecipeMessage.style.display = visibleCount === 0 ? 'block' : 'none';
                 });
             });
+
+            var eventTest = new CustomEvent("input");
+            searchBar.dispatchEvent(eventTest);
         });
 </script>
 </body>
