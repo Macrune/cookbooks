@@ -6,6 +6,51 @@
   box-sizing: border-box;
 }
 
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 3rem;
+  background-color: #F0EBE1;
+  border-bottom: 1px solid #ddd;
+}
+
+.logo, .footer-logo {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.8rem;
+  font-weight: bold;
+  line-height: 1.2;
+}
+.logo span, .footer-logo span {
+  color: #000; /* Warna "Books" menjadi hitam */
+  font-size: 1.4rem;
+  margin-top: -5px; /* Jarak kecil antara Cook dan Books */
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+nav ul li {
+  margin: 0 1rem;
+}
+nav ul li a {
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s ease;
+}
+nav ul li a:hover, nav ul li a.active {
+  color: #EE6352;
+}
+
+.search input {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
