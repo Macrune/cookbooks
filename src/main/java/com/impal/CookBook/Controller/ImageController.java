@@ -19,27 +19,35 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 
-
+//Controller untuk image prosessing
 @Controller
 @RequestMapping("/image")
 public class ImageController {
     @Autowired
     private ImageService service;
 
+    //Mapping untuk melakukan add/insert image ke database images
     @PostMapping("/add")
     public ResponseEntity<String> addImage(String title, MultipartFile image) throws IOException{
+        //Melakukan addImage menggunakan service
         final ObjectId id = service.addImage(title, image);
 
+        //Return link reference yang dapat digunakan untuk memanggil image
         return new ResponseEntity<String>("/image/" + id.toString(), HttpStatus.OK);
     }
 
+    //Mapping untuk request image berdasarkan id
     @GetMapping(value="/{id}", produces = MediaType.IMAGE_PNG_VALUE)
     public ResponseEntity<byte[]> getImage(@PathVariable String id) {
+        //Melakukan getImage menggunakan service
         final Image image = service.getImage(new ObjectId(id));
-        // byte[] file = Base64.getDecoder().decode(image.getImage().toString());
+
+        //Return image menggunakan response entity
         return new ResponseEntity<byte[]>(image.getImage(), HttpStatus.OK);
     }
     
+
+    //Mapping untuk api logo-logo pada CookBooks
     @GetMapping(value="/logo", produces = MediaType.IMAGE_PNG_VALUE)
     public ResponseEntity<byte[]> getLogo() {
         final Image image = service.getImage(new ObjectId("6772c69326802f23feaaaa4a"));

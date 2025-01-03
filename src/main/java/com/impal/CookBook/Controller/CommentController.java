@@ -20,13 +20,17 @@ public class CommentController {
     public String createComment(String payload, @PathVariable String imdbId,
                                             @CookieValue(value = "userCookie", defaultValue = "Guest") String cookie) {
         try {
+            //Cek jika user merupakan Guest atau tidak
             if (cookie.equals("Guest")) {
+                //Jika guest maka create comment tidak dilakukan
                 return "redirect:/recipes/" + imdbId;
             }else {
+                //Jika user telah login maka dilakukan create comment
                 service.createComment(payload, cookie, imdbId);
                 return "redirect:/recipes/" + imdbId;
             }
         } catch (Exception e) {
+            //Kembali ke homepage jika terjadi exception
             return "redirect:/";
         }
         

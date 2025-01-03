@@ -13,21 +13,30 @@ import com.impal.CookBook.Model.ImageRepository;
 
 @Service
 public class ImageService {
+    //Instansiasi Repository/database image
     @Autowired
     private ImageRepository repository;
 
+    //Function untuk melakukan add image
     public ObjectId addImage(String tittle, MultipartFile file) throws IOException {
+        //Create new image dengna tittle
         Image image = new Image(tittle);
+        //Set image berdasarkan multiPartFile yang dikonversi ke bytes
         image.setImage(file.getBytes());
+        //upload image ke repository
         image = repository.insert(image);
+        //Return id dari image
         return image.getId();
     }
 
+    //Function untuk mengambik image dari database
     public Image getImage(ObjectId id) {
         return repository.findById(id).get();
     }
 
+    //Function untuk melakukan delete image
     public String deleteImage(ObjectId id){
+        //Find image berdasarkan id dan melakukan delete
         Optional<Image> img = repository.deleteImageById(id);
         
         if (img.isPresent()) {
