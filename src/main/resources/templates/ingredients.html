@@ -174,40 +174,22 @@
             // Fungsi untuk filter kategori dan pindah ke bahan yang dipilih
             buttons.forEach(button => {
                 button.addEventListener('click', () => {
-                    // Hapus kelas aktif dari semua tombol
                     buttons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active'); // Tambah kelas aktif pada tombol yang diklik
-
-                    // Dapatkan kategori dari tombol
+                    button.classList.add('active');
                     const category = button.textContent.trim().toUpperCase();
+
                     let visibleCount = 0;
 
-                    // Update kategori yang dipilih
-                    selectedCategoryDisplay.textContent = category === 'ALL' ? 'All Recipes' : `${category} Recipes`;
-
-                    // Tampilkan/hilangkan kartu berdasarkan kategori
-                    let firstVisibleCard = null;
-
                     cards.forEach(card => {
-                        if (category === 'ALL' || card.dataset.category.toUpperCase() === category) {
+                        if (category === 'ALL' || card.dataset.category === category) {
                             card.style.display = 'block';
                             visibleCount++;
-
-                            if (!firstVisibleCard) {
-                                firstVisibleCard = card; // Simpan kartu pertama yang terlihat
-                            }
                         } else {
                             card.style.display = 'none';
                         }
                     });
 
-                    // Tampilkan/hilangkan pesan "No Recipe Found"
-                    noRecipeMessage.style.display = visibleCount > 0 ? "none" : "block";
-
-                    // Scroll ke bahan pertama yang terlihat
-                    if (firstVisibleCard) {
-                        firstVisibleCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }
+                    noRecipeMessage.style.display = visibleCount === 0 ? 'block' : 'none';
                 });
             });
         });
