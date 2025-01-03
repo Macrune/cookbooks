@@ -82,7 +82,7 @@
         <!-- Recipe Cards -->
         <div class="recipe-grid">
             <th:block th:each="recipe : ${data}">
-            <div class="card">
+            <div class="recipe-card">
                 <a th:href="@{'/recipes/' + ${recipe.imdbId}}" class="recipe-link">
                     <div class="image-container">
                         <img th:src="@{${recipe.mainImage}}">
@@ -90,6 +90,7 @@
                     <div class="recipe-content">
                         <div class ="nama"><td th:text="${recipe.author.username}"></td></div>
                         <h3 th:text="${recipe.tittle}"> </h3>
+                    </div>
                 </a>
                     <div class="description-container">
                         <p class="description-text">
@@ -107,7 +108,7 @@
                     </div>
                 </div>
             </div>
-           
+            </th:block>
         </div>
 
 
@@ -234,6 +235,16 @@
 
             var eventTest = new CustomEvent("input");
             searchBar.dispatchEvent(eventTest);
+        });
+
+        document.querySelectorAll('.see-more-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const descriptionText = this.previousElementSibling;
+                const isExpanded = descriptionText.classList.contains('expanded');
+                
+                descriptionText.classList.toggle('expanded');
+                this.textContent = isExpanded ? 'See More' : 'See Less';
+            });
         });
 </script>
 </body>
