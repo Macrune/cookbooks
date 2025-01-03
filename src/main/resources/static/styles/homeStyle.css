@@ -26,6 +26,11 @@ body {
     height: 70px;
 }
 
+.icon {
+    width: 15px;
+    height: 15px;
+}
+
 .nav-links {
     display: flex;
     gap: 2rem;
@@ -90,15 +95,6 @@ body {
 }
 
 .recipe-card {
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column;
-}
-
-.non-clickable{
     background: white;
     border-radius: 10px;
     overflow: hidden;
