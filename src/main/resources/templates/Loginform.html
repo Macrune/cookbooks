@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cook Books - Recipe Website</title>
     <link rel="stylesheet" th:href="@{/styles/styleForm.css}"  >
+    <script type="module" src="https://cdn.jsdelivr.net/npm/microsoft-cognitiveservices-speech-sdk@latest/distrib/browser/microsoft.cognitiveservices.speech.sdk.bundle-min.js"></script>
 </head>
 <body>
     <nav class="navbar">
@@ -32,7 +33,7 @@
         <form action="#" th:action="@{/login}" th:object="${request}" method="post">
           <div class="form-group">
             <label for="username">username</label>
-            <input type="username" id="username" name="username" placeholder="username" required>
+            <input type="username" id="STT" name="username" placeholder="username" required>
           </div>
           <div class="form-group">
             <ion-icon name="lock-closed-outline"></ion-icon>
@@ -41,10 +42,13 @@
           </div>
           <button type="submit" class="btn-login">LOG IN</button>
         </form>
+        <button id="startRecognizeOnceAsyncButton">Start Text to Speech</button>
         <a href="/register" class="forgot-password">tidak punya akun? Daftar</a>
       </div>
     <footer>
         <p>Copyright: © 2024 Cook Books</p>
     </footer>
+
+    <script th:src="@{/Javascript/STT.js}"></script>
 </body>
 </html>
