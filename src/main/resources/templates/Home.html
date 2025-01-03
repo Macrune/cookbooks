@@ -8,17 +8,27 @@
 
 </head>
 <body>
-    <nav class="navbar">
-        <a th:href="@{/}">
-            <img th:src="@{/image/logo}" class="logo">
-        </a>
-        <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">Recipes</a>
-            <a href="#">Ingredients</a>
-            <a href="#">Profile</a>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="logo">
+            Cook
+            <span>Books</span>
         </div>
-    </nav>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#" class="active">Ingredients</a></li>
+                <li><a href="#">Profile</a></li>
+            </ul>
+        </nav>
+        <div class="search">
+            <form th:action="@{/recipes/findRecipe}" th:object="${find}" method="post">
+                <input type="text" placeholder="Search...">
+                <button class="anu" type="submit">Search</button>
+                
+            </form>
+        </div>
+    </header>
 
     <section class="hero">
         <h1>Unleash Culinary Excellence</h1>
