@@ -67,7 +67,7 @@ public class UserController {
             response.addCookie(cookie);
             return "redirect:/";
         }catch(Exception e) {
-            return "/login?failed=true";
+            return "/login";
         }
     }
 
