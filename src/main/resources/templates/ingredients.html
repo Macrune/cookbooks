@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cook Books</title>
     <link rel="stylesheet" th:href="@{/styles/styleIngredients.css}">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/microsoft-cognitiveservices-speech-sdk@latest/distrib/browser/microsoft.cognitiveservices.speech.sdk.bundle-min.js"></script>
     <style>
         /* Custom styles for adjustments */
         .logo {
@@ -55,7 +56,13 @@
             </ul>
         </nav>
         <div class="search">
-            <input type="text" placeholder="Search..." th:value="${find}">
+            <input type="text" id="STT" placeholder="Search..." th:value="${find}">
+            <button id="startRecognizeOnceAsyncButton">
+                <svg id="micIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-mic-fill" viewBox="0 0 16 16">
+                    <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0z"/>
+                    <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5"/>
+                </svg>
+            </button>
         </div>
     </header>
 
@@ -106,6 +113,7 @@
                         <span th:text="${recipe.prepCategory}"></span>
                         <span th:text="${recipe.servings + ' Servings'}"> Servings</span>
                     </div>
+                    <hidden id="hidden" style="display:none;" th:text="${recipe.tags}">CREDITS_HERE</hidden>
                 </div>
             </div>
             </th:block>
@@ -180,10 +188,10 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const searchBar = document.querySelector(".search input"); // Search bar input
-            const recipeCards = document.querySelectorAll(".card"); // All recipe cards
+            const recipeCards = document.querySelectorAll(".recipe-card"); // All recipe cards
             const noRecipeMessage = document.querySelector(".no-recipe"); // "No Recipe Found" message
             const buttons = document.querySelectorAll('.filters button');
-            const cards = document.querySelectorAll('.recipes .card');
+            const cards = document.querySelectorAll('.recipe-card');
             const selectedCategoryDisplay = document.querySelector('.selected-category'); // Display for selected category
 
             // Fungsi untuk pencarian berdasarkan input di search bar
@@ -192,7 +200,7 @@
                 let found = false; // Track if any recipe matches
 
                 recipeCards.forEach(card => {
-                    const recipeTitle = card.querySelector("h3").textContent.toLowerCase();
+                    const recipeTitle = card.querySelector("hidden").textContent.toLowerCase();
                     if (recipeTitle.includes(query)) {
                         card.style.display = ""; // Show matching card
                         found = true;
@@ -247,5 +255,6 @@
             });
         });
 </script>
+<script th:src="@{/Javascript/STT.js}"></script>
 </body>
 </html>

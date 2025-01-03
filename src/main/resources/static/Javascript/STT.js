@@ -11,6 +11,7 @@ micIcon = document.getElementById("micIcon");
 subscriptionKey = "G6WRVtA1qMrvyU4t2GgoUFzAy6UxZLn1TiiHYvl5ZhqN4RG1OJCRJQQJ99BAACqBBLyXJ3w3AAAYACOG5lPJ";
 serviceRegion = "southeastasia";
 test = document.getElementById("STT")
+const searchBar = document.querySelector(".search input"); // Search bar input
 
 startRecognizeOnceAsyncButton.addEventListener("click", function () {
     startRecognizeOnceAsyncButton.disabled = true;
@@ -33,6 +34,8 @@ startRecognizeOnceAsyncButton.addEventListener("click", function () {
         test.value = result.text.replace('.', '')
         recognizer.close();
         recognizer = undefined;
+        var eventTest = new CustomEvent("input");
+        searchBar.dispatchEvent(eventTest);
     },
     function (err) {
         startRecognizeOnceAsyncButton.disabled = false;
