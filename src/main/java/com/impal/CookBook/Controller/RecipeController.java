@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 
+
 @Controller
 @RequestMapping("/recipes")
 public class RecipeController {
@@ -62,6 +63,15 @@ public class RecipeController {
             return "ingredients";
         }
     }
+
+    @PostMapping("/findRecipe")
+    public String postMethodName(String find) {
+        if (find.isEmpty() || find == null) {
+            return "redirect:/recipes/findRecipe";
+        }
+        return "redirect:/recipes/findRecipe?find="+find;
+    }
+    
 
     @GetMapping("/{imdbId}")
     public String getRecipeFromId(@PathVariable String imdbId, @CookieValue(value = "userCookie", defaultValue = "Guest") String cookie,
