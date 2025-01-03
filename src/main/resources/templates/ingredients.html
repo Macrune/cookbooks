@@ -50,13 +50,12 @@
         <nav>
             <ul>
                 <li><a href="#">Home</a></li>
-                <li><a href="#">Recipes</a></li>
                 <li><a href="#" class="active">Ingredients</a></li>
                 <li><a href="#">Profile</a></li>
             </ul>
         </nav>
         <div class="search">
-            <input type="text" placeholder="Search...">
+            <input type="text" placeholder="Search..." th:value="${find}">
         </div>
     </header>
 
@@ -69,14 +68,14 @@
             </h1>
             <p>With our diverse collection of recipes we have something for every ingredient.</p>
             <div class="filters">
-                <input type="button" value="ALL" class="active" onclick="buttonsearch('')"/>
-                <input type="button" value="CHICKEN" onclick="buttonsearch('chicken')"/>
-                <input type="button" value="EGG" onclick="buttonsearch('egg')"/>
-                <input type="button" value="CARROT" onclick="buttonsearch('carrot')"/>
-                <input type="button" value="BEEF" onclick="buttonsearch('beef')"/>
-                <input type="button" value="ONION" onclick="buttonsearch('onion')"/>
-                <input type="button" value="SALMON" onclick="buttonsearch('salmon')"/>
-                <input type="button" value="PASTA" onclick="buttonsearch('pasta')"/>
+                <button>ALL</button>
+                <button>CHICKEN</button>
+                <button>EGG</button>
+                <button>CARROT</button>
+                <button>BEEF</button>
+                <button>ONION</button>
+                <button>SALMON</button>
+                <button>PASTA</button>
             </div>
         </section>
 
@@ -151,11 +150,13 @@
             const noRecipeMessage = document.querySelector(".no-recipe"); // "No Recipe Found" message
             const buttons = document.querySelectorAll('.filters button');
             const cards = document.querySelectorAll('.recipes .card');
-            
+            const selectedCategoryDisplay = document.querySelector('.selected-category'); // Display for selected category
+
+            // Fungsi untuk pencarian berdasarkan input di search bar
             searchBar.addEventListener("input", function (event) {
                 const query = event.target.value.toLowerCase().trim(); // User input
                 let found = false; // Track if any recipe matches
-                
+
                 recipeCards.forEach(card => {
                     const recipeTitle = card.querySelector("h3").textContent.toLowerCase();
                     if (recipeTitle.includes(query)) {
@@ -163,31 +164,44 @@
                         found = true;
                     } else {
                         card.style.display = "none"; // Hide non-matching card
-                    }
+                     }
                 });
 
                 // Show or hide "No Recipe Found" message
                 noRecipeMessage.style.display = found ? "none" : "block";
             });
 
-            function buttonsearch (event) {
-                const query = event.target.value.toLowerCase().trim(); // User input
-                let found = false; // Track if any recipe matches
-                
-                recipeCards.forEach(card => {
-                    const recipeTitle = card.querySelector("h3").textContent.toLowerCase();
-                    if (recipeTitle.includes(query)) {
-                        card.style.display = ""; // Show matching card
-                        found = true;
-                    } else {
-                        card.style.display = "none"; // Hide non-matching card
-                    }
-                });
+            // Fungsi untuk filter kategori dan pindah ke bahan yang dipilih
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    buttons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    const category = button.textContent.trim().toUpperCase();
 
-                // Show or hide "No Recipe Found" message
-                noRecipeMessage.style.display = found ? "none" : "block";
-            };
+                    if (category == "ALL") {
+                        searchBar.value = "";
+                    }else {
+                        searchBar.value = category;
+                    }
+                    var eventTest = new CustomEvent("input");
+                    searchBar.dispatchEvent(eventTest);
+
+                    // cards.forEach(card => {
+                    //     if (category === 'ALL' || card.dataset.category === category) {
+                    //         card.style.display = 'block';
+                    //         visibleCount++;
+                    //     } else {
+                    //         card.style.display = 'none';
+                    //     }
+                    // });
+
+                    // noRecipeMessage.style.display = visibleCount === 0 ? 'block' : 'none';
+                });
+            });
+
+            var eventTest = new CustomEvent("input");
+            searchBar.dispatchEvent(eventTest);
         });
-    </script>
+</script>
 </body>
 </html>

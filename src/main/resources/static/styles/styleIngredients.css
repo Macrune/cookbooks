@@ -81,6 +81,7 @@ nav ul li a:hover, nav ul li a.active {
     color: #666;
 }
 
+/* Filter Buttons */
 .filters {
     margin: 1.5rem 0;
 }
@@ -92,15 +93,16 @@ nav ul li a:hover, nav ul li a.active {
     border-radius: 5px;
     cursor: pointer;
     transition: background 0.3s ease, color 0.3s ease;
+    font-weight: bold;
 }
 .filters button.active {
     background: #EE6352;
-    color: #262522;
+    color: white;
     font-weight: bold;
 }
 .filters button:hover {
     background: #EE6352;
-    color: #262522;
+    color: white;
 }
 
 /* Recipe Cards */
@@ -155,19 +157,6 @@ nav ul li a:hover, nav ul li a.active {
     border-radius: 8px;
 }
 
-.no-recipe.visible {
-    display: block; /* Tampilkan pesan jika diperlukan */
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
 
 /* Footer */
 footer {

@@ -45,16 +45,15 @@ public class RecipeController {
     public String findByIngredient(@RequestParam(defaultValue = "") String find, Model model) {
         List<RecipeCardResponse> allRecipesResponse = new ArrayList<RecipeCardResponse>();
         try {
+            List<Recipe> allRes = service.getAllRecipe();
+            for (Recipe re : allRes) {
+                allRecipesResponse.add(service.convertToResponseCard(re));
+            }
+
             if (find.isEmpty()) {
-                List<Recipe> allRes = service.getAllRecipe();
-                for (Recipe re : allRes) {
-                    allRecipesResponse.add(service.convertToResponseCard(re));
-                }
+                model.addAttribute("find", "");
             }else {
-                List<Recipe> findRes = service.findByText(find);
-                for (Recipe re : findRes) {
-                    allRecipesResponse.add(service.convertToResponseCard(re));
-                }
+                model.addAttribute("find", find);
             }
             model.addAttribute("data", allRecipesResponse);
             return "ingredients";
@@ -137,8 +136,12 @@ public class RecipeController {
     }
 
     @GetMapping("/createRecipe")
-    public String getCreateRecipe() {
-        return "addRecipe";
+    public String getCreateRecipe(@CookieValue(value = "userCookie", defaultValue = "Guest") String cookie) {
+        if (cookie.equals("Guest")) {
+            return "redirect:/login";
+        }else {
+            return "addRecipe";
+        }
     }
     
     @PostMapping("/createRecipe")

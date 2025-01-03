@@ -8,17 +8,27 @@
 
 </head>
 <body>
-    <nav class="navbar">
-        <a th:href="@{/}">
-            <img th:src="@{/image/logo}" class="logo">
-        </a>
-        <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">Recipes</a>
-            <a href="#">Ingredients</a>
-            <a href="#">Profile</a>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="logo">
+            Cook
+            <span>Books</span>
         </div>
-    </nav>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#" class="active">Ingredients</a></li>
+                <li><a href="#">Profile</a></li>
+            </ul>
+        </nav>
+        <div class="search">
+            <form th:action="@{/recipes/findRecipe}" th:object="${find}" method="post">
+                <input type="text" placeholder="Search...">
+                <button class="anu" type="submit">Search</button>
+                
+            </form>
+        </div>
+    </header>
 
     <section class="hero">
         <h1>Unleash Culinary Excellence</h1>
@@ -45,12 +55,12 @@
                         <button class="see-more-btn">See More</button>
                     </div>
                     <div class="rating">
-                        icon <p th:text="${featured[0].rating}"></p>
+                        <img th:src="@{/image/starIcon}" class="icon"> <span th:text="${featured[0].rating}"></span>
                     </div>
                     <div class="recipe-info">
                         <span th:text="${featured[0].cookTime + ' Min'}"> Minute</span>
                         <span th:text="${featured[0].prepCategory}"></span>
-                        <span th:text="${featured[0].servings + 'Servings'}"> Servings</span>
+                        <span th:text="${featured[0].servings + ' Servings'}"> Servings</span>
                     </div>
                 </div>
             </div>
@@ -70,7 +80,7 @@
                         <button class="see-more-btn">See More</button>
                     </div>
                     <div class="rating">
-                        icon <p th:text="${featured[0].rating}"></p>
+                        <img th:src="@{/image/starIcon}" class="icon"> <span th:text="${featured[0].rating}"></span>
                     </div>
                     <div class="recipe-info">
                         <span th:text="${featured[1].cookTime +' Min'}"> Minute</span>
@@ -95,7 +105,7 @@
                         <button class="see-more-btn">See More</button>
                     </div>
                     <div class="rating">
-                        icon <p th:text="${featured[2].rating}"></p>
+                        <img th:src="@{/image/starIcon}" class="icon"> <span th:text="${featured[2].rating}"></span>
                     </div>
                     <div class="recipe-info">
                         <span th:text="${featured[2].cookTime +' Min'}"> Minute</span>
@@ -128,7 +138,7 @@
                                     <button class="see-more-btn">See More</button>
                                 </div>
                                 <div class="rating">
-                                    icon <p th:text="${community[0].rating}"></p>
+                                    <img th:src="@{/image/starIcon}" class="icon"> <span th:text="${community[0].rating}"></span>
                                 </div>
                                 <div class="recipe-info">
                                     <span th:text="${community[0].cookTime + ' Min'}">  Minutes</span>
@@ -158,7 +168,7 @@
                                 <button class="see-more-btn">See More</button>
                             </div>
                             <div class="rating">
-                                icon <p th:text="${community[1].rating}"></p>
+                                <img th:src="@{/image/starIcon}" class="icon"> <span th:text="${community[1].rating}"></span>
                             </div>
                             <div class="recipe-info">
                                 <span th:text="${community[1].cookTime + ' Min'}"> Minutes</span>
@@ -187,7 +197,7 @@
                                 <button class="see-more-btn">See More</button>
                             </div>
                             <div class="rating">
-                                icon <p th:text="${community[2].rating}"></p>
+                                <img th:src="@{/image/starIcon}" class="icon"> <span th:text="${community[2].rating}"></span>
                             </div>
                             <div class="recipe-info">
                                 <span th:text="${community[2].cookTime + ' Min'}" ></span>
