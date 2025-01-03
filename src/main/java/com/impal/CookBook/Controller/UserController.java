@@ -113,7 +113,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/account/profile")
+    @GetMapping("/profile")
     public String userProfile(@CookieValue(value = "userCookie", defaultValue = "Guest") String cookie, Model model) {
         try {
             if (cookie.equals("Guest")) {

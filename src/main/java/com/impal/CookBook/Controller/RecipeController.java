@@ -137,8 +137,12 @@ public class RecipeController {
     }
 
     @GetMapping("/createRecipe")
-    public String getCreateRecipe() {
-        return "addRecipe";
+    public String getCreateRecipe(@CookieValue(value = "userCookie", defaultValue = "Guest") String cookie) {
+        if (cookie.equals("Guest")) {
+            return "redirect:/login";
+        }else {
+            return "addRecipe";
+        }
     }
     
     @PostMapping("/createRecipe")

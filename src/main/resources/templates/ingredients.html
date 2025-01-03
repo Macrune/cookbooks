@@ -178,18 +178,25 @@
                     button.classList.add('active');
                     const category = button.textContent.trim().toUpperCase();
 
-                    let visibleCount = 0;
+                    // let visibleCount = 0;
+                    if (category == "ALL") {
+                        searchBar.value = "";
+                    }else {
+                        searchBar.value = category;
+                    }
+                    var eventTest = new CustomEvent("input");
+                    searchBar.dispatchEvent(eventTest);
 
-                    cards.forEach(card => {
-                        if (category === 'ALL' || card.dataset.category === category) {
-                            card.style.display = 'block';
-                            visibleCount++;
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    });
+                    // cards.forEach(card => {
+                    //     if (category === 'ALL' || card.dataset.category === category) {
+                    //         card.style.display = 'block';
+                    //         visibleCount++;
+                    //     } else {
+                    //         card.style.display = 'none';
+                    //     }
+                    // });
 
-                    noRecipeMessage.style.display = visibleCount === 0 ? 'block' : 'none';
+                    // noRecipeMessage.style.display = visibleCount === 0 ? 'block' : 'none';
                 });
             });
         });
