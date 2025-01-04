@@ -5,8 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
     <link rel="stylesheet" th:href="@{/styles/style_profile.css}">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/microsoft-cognitiveservices-speech-sdk@latest/distrib/browser/microsoft.cognitiveservices.speech.sdk.bundle-min.js"></script>
+    
 </head>
 <body>
+
+    <header>
+        <div class="logo">
+            Cook
+            <span>Books</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/recipes/findRecipe}">Ingredients</a></li>
+                <li><a th:href="@{/profile}" class="active">Profile</a></li>
+            </ul>
+        </nav>
+        <div class="search">
+            <form th:action="@{/recipes/findRecipe}" th:object="${find}" method="post">
+                <input type="text" name="find" id="STT" placeholder="Search...">
+                <button id="startRecognizeOnceAsyncButton">
+                    <svg id="micIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-mic-fill" viewBox="0 0 16 16">
+                        <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0z"/>
+                        <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5"/>
+                    </svg>
+                </button>
+                <button class="anu" type="submit">Search</button>
+            </form>
+        </div>
+    </header>
+
     <div class="profile-container">
         <div class="profile-header">
             <img th:src="@{${user.profilePic}}" alt="Profile Picture" class="profile-pic">
@@ -67,5 +96,6 @@
             </div>
         </div>
     </div>
+    <script th:src="@{/Javascript/STT.js}"></script>
 </body>
 </html>

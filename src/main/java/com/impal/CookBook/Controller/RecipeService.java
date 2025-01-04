@@ -66,7 +66,7 @@ public class RecipeService {
             rating = rating/ratings.size();
         }
         return new RecipeCardResponse(re.getImdbId(), author, re.getTittle(), re.getDescription()
-                , re.getCookTime(), re.getPrepCategory(), re.getServings(), rating, re.getMainImage());
+                , re.getCookTime(), re.getPrepCategory(), re.getServings(), rating, re.getMainImage(), re.getTags());
     }
 
     public List<Recipe> getAllRecipe() {

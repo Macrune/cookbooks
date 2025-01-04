@@ -1,5 +1,6 @@
 package com.impal.CookBook.Payload;
 
+import java.util.ArrayList;
 
 public class RecipeCardResponse {
 
@@ -12,8 +13,9 @@ public class RecipeCardResponse {
     private int servings;
     private double rating;
     private String mainImage;
+    private ArrayList<String> tags;
 
-    public RecipeCardResponse(String imdbId, UserInfoResponse author, String tittle, String Description, int cookTime, String prepCategory, int servings, double rating, String mainImage) {
+    public RecipeCardResponse(String imdbId, UserInfoResponse author, String tittle, String Description, int cookTime, String prepCategory, int servings, double rating, String mainImage, ArrayList<String> tags) {
         this.imdbId = imdbId;
         this.author = author;
         this.tittle = tittle;
@@ -23,6 +25,7 @@ public class RecipeCardResponse {
         this.servings = servings;
         this.rating = rating;
         this.mainImage = mainImage;
+        this.tags = tags;
     }
 
     public RecipeCardResponse() {
@@ -100,5 +103,11 @@ public class RecipeCardResponse {
         this.mainImage = mainImage;
     }
 
-    
+    public ArrayList<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(ArrayList<String> tags) {
+        this.tags = tags;
+    }
 }
