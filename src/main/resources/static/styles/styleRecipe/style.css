@@ -141,12 +141,11 @@ nav ul li a:hover, nav ul li a.active {
 body {
   font-family: 'Work Sans', Helvetica, Arial, Sans-Serif;
   font-weight: 300;
-  background-image: url("../images/body_background.jpg");
-  background-size: cover;
-  background-position: center center;
-  background-attachment: fixed;
-  line-height: 1.7;
-  zoom: 1;
+  /* background-size: cover; */
+  /* background-position: center center;
+  background-attachment: fixed; */
+  /* line-height: 1.7;
+  zoom: 1; */
 }
 
 h1, h2, h3 {
@@ -199,15 +198,19 @@ header .logo {
 }
 
 .content {
-  background: #f8ece4;
+  background: #f9f2ee;
   font-size: 0;
-  padding: 2rem 2rem 3rem;
-  max-width: 1200px;
+  /* padding: 2rem 2rem 3rem;
+  max-width: 1200px; */
   margin: 0 auto;
 }
 
 .content .shop, .content .heading{
   font-size: 1rem;
+}
+
+.titleRecipe{
+  text-align: center;
 }
 
 .content .heading {
