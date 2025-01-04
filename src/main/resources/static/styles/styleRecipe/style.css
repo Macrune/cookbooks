@@ -161,7 +161,7 @@ header .logo {
   margin: 0 auto;
 }
 
-.content .shop, .content .heading, .content .banner {
+.content .shop, .content .heading{
   font-size: 1rem;
 }
 
@@ -326,13 +326,6 @@ footer {
     color: #b4a191;
   }
   
-  .profile-description {
-    font-size: 1rem;
-    color: #666;
-    line-height: 1.5;
-    margin-bottom: 20px;
-  }
-  
   .learn-more-button {
     background-color: #fff;
     border: 2px solid #333;
@@ -368,12 +361,12 @@ footer {
     font-size: 1.5rem;
     font-weight: bold;
     color: #333;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
   }
   
-  .comment-form, .reply-form {
+  /* .comment-form, .reply-form {
     margin-bottom: 20px;
-  }
+  } */
   
   .comment-input, .reply-input {
     width: 100%;
@@ -384,13 +377,13 @@ footer {
     margin-bottom: 10px;
   }
   
-  .comment-submit, .reply-submit {
+  .comment-submit{
     background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 5px;
     padding: 10px 15px;
-    font-size: 0.9rem;
+    font-size: 0.9rem;  
     cursor: pointer;
     transition: background-color 0.3s;
   }
@@ -408,42 +401,69 @@ footer {
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 15px;
-    margin-bottom: 15px;
     position: relative;
   }
-  
-  .comment-content {
-    margin-bottom: 10px;
-  }
-  
-  .reply-button {
-    background: none;
-    border: none;
-    color: #007bff;
-    font-size: 0.9rem;
-    cursor: pointer;
-    margin-left: 10px;
-  }
-  
-  .reply-button:hover {
-    text-decoration: underline;
-  }
-  
-  .replies {
-    margin-left: 20px;
-    margin-top: 10px;
-  }
-  
-  .reply {
-    background-color: #f1f1f1;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
-  }
-  
-  .hidden {
-    display: none;
-  }
   /* END COMMENT SECTION */
+
+  /* START RATING */
+
+  .rating-container {
+    max-width: 300px;
+    margin: 20px;
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f4ed;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .star-rating {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: center;
+      gap: 8px;
+  }
+
+  .star-rating input {
+      display: none;
+  }
+
+  .star-rating label {
+      font-size: 30px;
+      color: #ddd;
+      cursor: pointer;
+  }
+
+  .star-rating label:before {
+      content: '★';
+  }
+
+  .star-rating input:checked ~ label,
+  .star-rating label:hover,
+  .star-rating label:hover ~ label {
+      color: #ffd700;
+  }
+
+  .submit-btn {
+    background-color: #fff;
+    border: 2px solid #333;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .submit-btn:hover {
+      background: #45a049;
+  }
+
+  /* END RATING */
+
+  /* START INSTRUCTION */
+
+
+  /* END INTSTURCINO */
 }

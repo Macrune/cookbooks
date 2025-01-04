@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 
+
 @Controller
 @RequestMapping("")
 public class UserController {
@@ -112,6 +113,22 @@ public class UserController {
         }
     }
 
+    @GetMapping("/account/profile")
+    public String userProfile(@CookieValue(value = "userCookie", defaultValue = "Guest") String cookie, Model model) {
+        try {
+            if (cookie.equals("Guest")) {
+                return "redirect:/login";
+            }else {
+                @SuppressWarnings("unused")
+                User user = service.findUserByImdbId(cookie);
+                return "redirect:/account/" + cookie;
+            }
+        }catch (Exception e) {
+            return "redirect:/";
+        }
+    }
+    
+
     @GetMapping("/account/{imdbId}")
     public String findUser(@PathVariable String imdbId, @CookieValue(value = "userCookie", defaultValue = "Guest") String cookie,
                             Model model) {
@@ -128,17 +145,33 @@ public class UserController {
                 bookmarks.add(recipeService.convertToResponseCard(rp));
             }
             
+            if (myRecipes.isEmpty()) {
+                model.addAttribute("myRecipeNull", true);
+            }else {
+                model.addAttribute("myRecipeNull", false);
+            }
+
+            if (bookmarks.isEmpty()) {
+                model.addAttribute("bookmarksNull", true);
+            }else {
+                model.addAttribute("bookmarksNull", false);
+            }
+
             if (user.getImdbId().matches(cookie)) {
                 model.addAttribute("isUser", true);
+            }else {
+                model.addAttribute("isUser", false);
             }
 
             model.addAttribute("myrecipes", myRecipes);
             model.addAttribute("bookmarks", bookmarks);
             model.addAttribute("cookie", cookie);
-            model.addAttribute("userResponse", userResponse);
+            model.addAttribute("user", userResponse);
             return "profile";
+            // return new ResponseEntity<Model>(model, HttpStatus.OK);
         }catch (Exception e) {
             return "redirect:/";
+            // return new ResponseEntity<Model>(model, HttpStatus.OK);
         }
     }
     

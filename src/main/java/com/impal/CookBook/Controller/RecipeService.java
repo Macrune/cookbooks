@@ -1,7 +1,6 @@
 package com.impal.CookBook.Controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -123,7 +122,7 @@ public class RecipeService {
             .first();
 
         }catch (Exception e) {
-            throw new Exception("addToBookmark.Recipe not found!!");
+            throw new Exception("addToBookmark." + e.getMessage());
         }
     }
 
@@ -142,14 +141,13 @@ public class RecipeService {
     public void addRating(String imdbId, String cookie, int rating) throws Exception {
         try {
             Recipe rp = findRecipeByImdbId(imdbId);
-            Map<String, Integer> rt = new HashMap<>();
+            Map<String, Integer> rt = rp.getRating();
             rt.put(cookie, rating);
             mongoTemplate.update(Recipe.class)
                 .matching(Criteria.where("imdbId").is(imdbId))
-                .apply(new Update().push("rating").value(rt))
-                .first();
+                .apply(new Update().set("rating", rt)).first();
         }catch (Exception e) {
-            throw new Exception("addRating.Recipe not found!!");
+            throw new Exception("addRating." + e.getMessage());
         }
     }
 
@@ -176,7 +174,7 @@ public class RecipeService {
                     images.add("");
                 }else {
                     ObjectId imageId = imageService.addImage(obId.toString() + "_img" + i, stepFile.get(i));
-                    images.add("image/" + imageId.toString());
+                    images.add("/image/" + imageId.toString());
                 }
             }
 
@@ -185,7 +183,7 @@ public class RecipeService {
                 mainImage = "";
             }else {
                 ObjectId imageId = imageService.addImage(obId.toString() + "_main", requestMainImage);
-                mainImage = "image/" + imageId.toString();
+                mainImage = "/image/" + imageId.toString();
             }
 
             Recipe rcp = new Recipe(obId, author, request.getTittle(), request.getDescription(), request.getCookTime(), request.getTags(),
@@ -193,6 +191,12 @@ public class RecipeService {
                                     body, images);
 
             repository.insert(rcp);
+
+            mongoTemplate.update(User.class)
+                .matching(Criteria.where("imdbId").is(author.getImdbId()))
+                .apply(new Update().push("myrecipes").value(rcp.getId()))
+                .first();
+            
             return obId.toString();
         }catch (Exception e) {
             throw new Exception(e.getMessage());

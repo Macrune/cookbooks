@@ -31,6 +31,13 @@
             margin-top: -5px; /* Adjust spacing between ANY and INGREDIENT */
             color: black; /* Set the color for INGREDIENT to black */
         }
+
+        .no-recipe {
+            text-align: center;
+            color: black;
+            font-size: 1.2rem;
+            display: none; /* Hidden by default */
+        }
     </style>
 </head>
 <body>
@@ -45,7 +52,6 @@
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Recipes</a></li>
                 <li><a href="#" class="active">Ingredients</a></li>
-                <li><a href="#">About Us</a></li>
                 <li><a href="#">Profile</a></li>
             </ul>
         </nav>
@@ -63,18 +69,20 @@
             </h1>
             <p>With our diverse collection of recipes we have something for every ingredient.</p>
             <div class="filters">
-                <button class="active">ALL</button>
-                <button>GARLIC</button>
-                <button>CHICKEN</button>
-                <button>POTATO</button>
-                <button>CARROT</button>
-                <button>EGGS</button>
-                <button>TEMPE</button>
+                <input type="button" value="ALL" class="active" onclick="buttonsearch('')"/>
+                <input type="button" value="CHICKEN" onclick="buttonsearch('chicken')"/>
+                <input type="button" value="EGG" onclick="buttonsearch('egg')"/>
+                <input type="button" value="CARROT" onclick="buttonsearch('carrot')"/>
+                <input type="button" value="BEEF" onclick="buttonsearch('beef')"/>
+                <input type="button" value="ONION" onclick="buttonsearch('onion')"/>
+                <input type="button" value="SALMON" onclick="buttonsearch('salmon')"/>
+                <input type="button" value="PASTA" onclick="buttonsearch('pasta')"/>
             </div>
         </section>
 
         <!-- Recipe Cards -->
         <section class="recipes">
+            <div class="no-recipe">No Recipe Found</div>
             <div class="card">
                 <img src="./image/chicken1.jpg" alt="Savory Herb-Infused Chicken">
                 <h3>Savory Herb-Infused Chicken</h3>
@@ -132,9 +140,54 @@
             <li><a href="#">Home</a></li>
             <li><a href="#">Recipes</a></li>
             <li><a href="#">Cooking Tips</a></li>
-            <li><a href="#">About Us</a></li>
         </ul>
         <p>&copy; 2024 Cook Book. All rights reserved.</p>
     </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchBar = document.querySelector(".search input"); // Search bar input
+            const recipeCards = document.querySelectorAll(".card"); // All recipe cards
+            const noRecipeMessage = document.querySelector(".no-recipe"); // "No Recipe Found" message
+            const buttons = document.querySelectorAll('.filters button');
+            const cards = document.querySelectorAll('.recipes .card');
+            
+            searchBar.addEventListener("input", function (event) {
+                const query = event.target.value.toLowerCase().trim(); // User input
+                let found = false; // Track if any recipe matches
+                
+                recipeCards.forEach(card => {
+                    const recipeTitle = card.querySelector("h3").textContent.toLowerCase();
+                    if (recipeTitle.includes(query)) {
+                        card.style.display = ""; // Show matching card
+                        found = true;
+                    } else {
+                        card.style.display = "none"; // Hide non-matching card
+                    }
+                });
+
+                // Show or hide "No Recipe Found" message
+                noRecipeMessage.style.display = found ? "none" : "block";
+            });
+
+            function buttonsearch (event) {
+                const query = event.target.value.toLowerCase().trim(); // User input
+                let found = false; // Track if any recipe matches
+                
+                recipeCards.forEach(card => {
+                    const recipeTitle = card.querySelector("h3").textContent.toLowerCase();
+                    if (recipeTitle.includes(query)) {
+                        card.style.display = ""; // Show matching card
+                        found = true;
+                    } else {
+                        card.style.display = "none"; // Hide non-matching card
+                    }
+                });
+
+                // Show or hide "No Recipe Found" message
+                noRecipeMessage.style.display = found ? "none" : "block";
+            };
+        });
+    </script>
 </body>
 </html>

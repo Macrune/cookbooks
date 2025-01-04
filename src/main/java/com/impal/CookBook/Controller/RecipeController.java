@@ -27,6 +27,9 @@ public class RecipeController {
     @Autowired
     private RecipeService service;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/allrecipe")    
     public ResponseEntity<List<RecipeResponse>> allRecipe() {
         List<Recipe> allRes = service.getAllRecipe();
@@ -39,7 +42,7 @@ public class RecipeController {
     }
     
     @GetMapping("/findRecipe")    
-    public String findByIngredient(@RequestParam String find, Model model) {
+    public String findByIngredient(@RequestParam(defaultValue = "") String find, Model model) {
         List<RecipeCardResponse> allRecipesResponse = new ArrayList<RecipeCardResponse>();
         try {
             if (find.isEmpty()) {
@@ -67,14 +70,35 @@ public class RecipeController {
         try {
             Recipe rp = service.findRecipeByImdbId(imdbId);
             RecipeResponse response = service.convertToResponse(rp);
+
             if (cookie.equals("Guest")) {
                 model.addAttribute("isLoggedIn", false);
+                model.addAttribute("hasBookmarked", false);
             }else {
+                User user = userService.findUserByImdbId(cookie);
+                boolean cek = false;
+                for (Recipe recipe : user.getBookmarks()) {
+                    if (recipe.getImdbId().matches(imdbId)) {
+                        model.addAttribute("hasBookmarked", true);
+                        cek = true;
+                        break;
+                    }
+                }
+                if (!cek) {
+                    model.addAttribute("hasBookmarked", false);
+                }
+
                 model.addAttribute("isLoggedIn", true);
             }
+
             if (rp.getRating().containsKey(cookie)) {
-                model.addAttribute("rating", rp.getRating().get(cookie));
+                model.addAttribute("userRating", rp.getRating().get(cookie));
+            }else{
+                model.addAttribute("userRating", 0);
             }
+
+
+
             model.addAttribute("data", response);
             return "recipe";
         } catch (Exception e) {
@@ -106,7 +130,7 @@ public class RecipeController {
     public String addRating(@PathVariable String imdbId, @CookieValue(value = "userCookie", defaultValue = "Guest") String cookie, int rating) {
         try {
             service.addRating(imdbId, cookie, rating);
-            return "redirect:/"+imdbId;
+            return "redirect:/recipes/"+imdbId;
         } catch (Exception e) {
             return "redirect:/";
         }
