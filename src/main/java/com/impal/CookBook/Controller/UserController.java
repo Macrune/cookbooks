@@ -202,12 +202,12 @@ public class UserController {
     
     //Versi API open account 
     @GetMapping("/api/account/{imdbId}")
-    public ResponseEntity<?> getMethodName(@PathVariable String imdbId) {
+    public ResponseEntity<User> apiGetUser(@PathVariable String imdbId) {
         try {
             User user = service.findUserByImdbId(imdbId);
             return new ResponseEntity<User>(user, HttpStatus.OK);
         }catch (Exception e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.OK);
+            return new ResponseEntity<User>(HttpStatus.OK);
         }
     }
     

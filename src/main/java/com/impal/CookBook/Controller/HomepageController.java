@@ -41,7 +41,7 @@ public class HomepageController {
 
     //Mapping api untuk request recipe dengan tag featured
     @GetMapping("/api/homepage/featured")
-    public ResponseEntity<?> getFeaturedRecipe() {
+    public ResponseEntity<ArrayList<RecipeCardResponse>> getFeaturedRecipe() {
 
         try {
             //Buat tag yang berisi featured
@@ -61,7 +61,7 @@ public class HomepageController {
             return new ResponseEntity<ArrayList<RecipeCardResponse>>(cardRecipes, HttpStatus.OK);
         } catch (Exception e) {
             //Return response dengan cardRecipes yang telah dibuat degnan httpstatus ok
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<ArrayList<RecipeCardResponse>>( HttpStatus.BAD_REQUEST);
         }
     }
 
