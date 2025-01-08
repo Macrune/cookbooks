@@ -70,7 +70,7 @@
                 </div>
             </div>
             <div class="recipe-card">
-                <a th:href="@{'/recipes/' + ${featured[0].imdbId}}" class="recipe-link">
+                <a th:href="@{'/recipes/' + ${featured[1].imdbId}}" class="recipe-link">
                     <div class="image-container">
                         <img th:src="@{${featured[1].mainImage}}">
                     </div>
@@ -95,7 +95,7 @@
                 </div>
             </div> 
             <div class="recipe-card">
-                <a th:href="@{'/recipes/' + ${featured[0].imdbId}}" class="recipe-link">
+                <a th:href="@{'/recipes/' + ${featured[2].imdbId}}" class="recipe-link">
                     <div class="image-container">
                         <img th:src="@{${featured[2].mainImage}}">
                     </div>
